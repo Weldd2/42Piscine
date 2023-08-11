@@ -1,22 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_rev_int_tab.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <marvin@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 09:24:41 by amura             #+#    #+#             */
-/*   Updated: 2023/08/11 09:31:41 by amura            ###   ########.fr       */
+/*   Created: 2023/08/11 09:38:18 by amura             #+#    #+#             */
+/*   Updated: 2023/08/11 09:56:01 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_putstr(char *str)
+void	ft_rev_int_tab(int *tab, int size)
 {
-	while (*str)
+	int	compteur;
+	int	temp;
+	int	fin;
+
+	compteur = 0;
+	temp = -1;
+	fin = size - 1;
+	while (compteur < fin)
 	{
-		write(1, str, 1);
-		str++;
+		temp = tab[compteur];
+		tab[compteur] = tab[fin];
+		tab[fin] = temp;
+		compteur++;
+		fin--;
 	}
 }
