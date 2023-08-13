@@ -10,23 +10,27 @@ void	rush(int largeur, int longueur)
 	int	i;
 	int	j;
 
-	i = 0;
-	while (i < longueur)
+	i = 1;
+	while (i <= longueur)
 	{
-		j = 0;
-		while (j < largeur)
+		j = 1;
+		while (j <= largeur)
 		{
-			if ( (j == 0 && i == 0)
-				|| (j == 0 && i == longueur-1)
-				|| (j == largeur-1 && i == 0)
-				|| (j == largeur-1 && i == longueur-1)
-					)
+			if ( ( (i == 1 && j == 1) || (i == longueur && j == largeur) ) && (i != longueur && i != 1) )
 			{
-				print('0');
+				print('A');
 			}
-			else 
+			else if ( (i == 1 || i == longueur) && j == 1)
 			{
-				print('-');
+				print('C');
+			}
+			else if (i == 1 || i == longueur || j == 1 || j == largeur)
+			{
+				print('B');
+			}
+			else
+			{
+				print(' ');
 			}
 			j++;
 		}
@@ -37,5 +41,5 @@ void	rush(int largeur, int longueur)
 
 int	main(void)
 {
-	rush(5, 1);
+	rush(1, 3);
 }
