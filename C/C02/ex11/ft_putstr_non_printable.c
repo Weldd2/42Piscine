@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 12:03:53 by amura             #+#    #+#             */
-/*   Updated: 2023/08/14 12:53:52 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/14 16:24:15 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ void ft_putstr_non_printable(char *str)
 {
 	while (*str)
 	{
-		if (*str < ' ' || *str > 126)  // Check if the character is non-printable
+		if (*str < ' ' || *str > 126)
 		{
 			print_hex((unsigned char)*str);
 		}
