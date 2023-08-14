@@ -6,12 +6,14 @@ int	ft_str_is_numeric(char *str);
 int	ft_str_is_lowercase(char *str);
 int	ft_str_is_uppercase(char *str);
 int	ft_str_is_printable(char *str);
-char	*ft_strupcase(char *str);
 char	*ft_strlowcase(char *str);
-;
+char	*ft_strcapitalize(char *str);
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size);
+
 int	main() {
 	// Ajoutez des tests ici si nécessaire
-	char	str[15] = "abcDde\n";
+	char	src[15] = "abcdesaddsa";
+	char	dest[15] = "e";
 
 	// ft_str_is_alpha(str);
 	// ft_str_is_numeric(str);
@@ -20,7 +22,10 @@ int	main() {
 	// ft_str_is_printable(str);
 	// ft_strupcase(str);
 	// ft_strlowcase(str);
+	// ft_strcapitalize(str);
+	ft_strlcpy(dest, src, 50);
 
-	printf("%s", str);
+	printf("%s\n", src);
+	printf("%s\n", dest);
 	return 0;
 }

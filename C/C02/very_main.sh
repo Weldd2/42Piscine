@@ -10,7 +10,7 @@ find . -type f -name "*.c" | while read -r file; do
 
     # Extraire la déclaration de la fonction à partir du fichier .c
     # Utiliser l'option -P pour permettre des séquences d'échappement comme \t
-    declaration=$(grep -P "^[a-zA-Z_][a-zA-Z0-9_]*\t[*]?\s*$function_name\(" "$file")
+    declaration=$(grep -P "^(unsigned int|[a-zA-Z_][a-zA-Z0-9_]*)\t[*]?\s*$function_name\(" "$file")
 
     # Ajouter la déclaration de la fonction dans main.c
     echo "$declaration;" >> main.c
@@ -30,7 +30,7 @@ find . -type f -name "*.c" | while read -r file; do
 done
 
 # Fermer le corps de la fonction main
-echo "	printf(\"%s\", str);" >> main.c
+echo "	printf(\"%s\\n\", str);" >> main.c
 echo "	return 0;" >> main.c
 echo "}" >> main.c
 

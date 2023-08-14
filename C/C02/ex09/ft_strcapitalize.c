@@ -1,34 +1,59 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlowcase.c                                    :+:      :+:    :+:   */
+/*   ft_strcapitalize.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 11:30:42 by amura             #+#    #+#             */
-/*   Updated: 2023/08/14 11:30:47 by amura            ###   ########.fr       */
+/*   Created: 2023/08/14 11:05:00 by amura             #+#    #+#             */
+/*   Updated: 2023/08/14 11:31:22 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	is_uppercase(char c)
+int	is_lowercase(char c)
 {
-	if (c > 'Z' || c < 'A')
+	if (c > 'z' || c < 'a')
 	{
 		return (0);
 	}
 	return (1);
 }
 
-char	*ft_strlowcase(char *str)
+int	is_alphanumeric(char c)
+{
+	if ((c < 'A' || c > 'Z') && (c < 'a' || c > 'z') && (c < '0' || c > '9'))
+	{
+		return (0);
+	}
+	return (1);
+}
+
+char	strupcase(char c)
+{
+	if (is_lowercase(c))
+	{
+		c -= 32;
+	}
+	return (c);
+}
+
+char	*ft_strcapitalize(char *str)
 {
 	int	i;
 
 	i = 0;
 	while (str[i])
 	{
-		if (is_uppercase(str[i]))
+		if (i == 0)
 		{
-			str[i] = str[i] + 32;
+			str[i] = strupcase(str[i]);
+		}
+		else
+		{
+			if (!is_alphanumeric(str[i - 1]))
+			{
+				str[i] = strupcase(str[i]);
+			}
 		}
 		i++;
 	}

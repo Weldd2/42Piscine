@@ -1,25 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 10:12:03 by amura             #+#    #+#             */
-/*   Updated: 2023/08/14 11:30:13 by amura            ###   ########.fr       */
+/*   Created: 2023/08/14 11:33:04 by amura             #+#    #+#             */
+/*   Updated: 2023/08/14 11:45:15 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
+unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
 {
-	int	compteur;
+	unsigned int	i;
 
-	compteur = 0;
-	while (src[compteur])
+	i = 0;
+	while (src[i] && (i < size))
 	{
-		dest[compteur] = src[compteur];
-		compteur++;
+		dest[i] = src[i];
+		i++;
 	}
-	dest[compteur] = '\0';
-	return (dest);
+	return (i);
 }
