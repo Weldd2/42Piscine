@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strcpy.c                                        :+:      :+:    :+:   */
+/*   ft_putstr_non_printable.c                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/11 10:12:03 by amura             #+#    #+#             */
-/*   Updated: 2023/08/14 12:24:08 by amura            ###   ########.fr       */
+/*   Created: 2023/08/14 12:03:53 by amura             #+#    #+#             */
+/*   Updated: 2023/08/14 12:53:52 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strcpy(char *dest, char *src)
-{
-	int	compteur;
+#include <unistd.h>
 
-	compteur = 0;
-	while (src[compteur])
+void    print_hex(unsigned char c)
+{
+    char *base;
+
+    base = "0123456789abcdef";
+    write(1, "\\", 1);
+    write(1, &base[c / 16], 1);
+    write(1, &base[c % 16], 1);
+}
+
+void ft_putstr_non_printable(char *str)
+{
+	while (*str)
 	{
-		dest[compteur] = src[compteur];
-		compteur++;
+		if (*str < ' ' || *str > 126)  // Check if the character is non-printable
+		{
+			print_hex((unsigned char)*str);
+		}
+		else
+		{
+			write(1, str, 1);
+		}
+		str++;
 	}
-	dest[compteur] = '\0';
-	return (dest);
 }
