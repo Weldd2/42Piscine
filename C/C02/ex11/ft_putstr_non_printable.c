@@ -5,24 +5,24 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 12:03:53 by amura             #+#    #+#             */
-/*   Updated: 2023/08/14 16:24:15 by amura            ###   ########.fr       */
+/*   Created: 2023/08/15 16:59:37 by amura             #+#    #+#             */
+/*   Updated: 2023/08/15 17:00:28 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void    print_hex(unsigned char c)
+void	print_hex(unsigned char c)
 {
-    char *base;
+	char	*base;
 
-    base = "0123456789abcdef";
-    write(1, "\\", 1);
-    write(1, &base[c / 16], 1);
-    write(1, &base[c % 16], 1);
+	base = "0123456789abcdef";
+	write(1, "\\", 1);
+	write(1, &base[c / 16], 1);
+	write(1, &base[c % 16], 1);
 }
 
-void ft_putstr_non_printable(char *str)
+void	ft_putstr_non_printable(char *str)
 {
 	while (*str)
 	{

@@ -6,9 +6,25 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 11:05:00 by amura             #+#    #+#             */
-/*   Updated: 2023/08/14 11:31:22 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/15 16:58:53 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+char	*strlowcase(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (!(str[i] > 'Z' || str[i] < 'A'))
+		{
+			str[i] = str[i] + 32;
+		}
+		i++;
+	}
+	return (str);
+}
 
 int	is_lowercase(char c)
 {
@@ -42,6 +58,7 @@ char	*ft_strcapitalize(char *str)
 	int	i;
 
 	i = 0;
+	strlowcase(str);
 	while (str[i])
 	{
 		if (i == 0)

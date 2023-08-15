@@ -1,25 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strstr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 11:33:04 by amura             #+#    #+#             */
-/*   Updated: 2023/08/15 16:55:05 by amura            ###   ########.fr       */
+/*   Created: 2023/08/15 14:44:50 by amura             #+#    #+#             */
+/*   Updated: 2023/08/15 16:57:07 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+int	src_length(char *str)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while (src[i] && (i < size - 1))
+	while (str[i])
 	{
-		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
 	return (i);
+}
+
+char	*ft_strstr(char *str, char *to_find)
+{
+	int	j;
+	
+	while (*str)
+	{
+		j = 0;
+		while (str[j] == to_find[j])
+		{
+			if (to_find[j + 1] == '\0')
+			{
+				return str;
+			}	
+			j++;
+		}
+		str++;
+	}
+	return 0;
 }

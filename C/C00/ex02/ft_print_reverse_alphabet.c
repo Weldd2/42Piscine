@@ -3,7 +3,7 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_reverse_alphabet.c                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: amura <amura@42.fr>                       +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 17:53:36 by amura             #+#    #+#             */
 /*   Updated: 2023/08/10 18:05:33 by amura            ###   ########.fr       */

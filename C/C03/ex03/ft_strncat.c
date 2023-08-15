@@ -1,25 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
+/*   ft_strncat.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/14 11:33:04 by amura             #+#    #+#             */
-/*   Updated: 2023/08/15 16:55:05 by amura            ###   ########.fr       */
+/*   Created: 2023/08/15 14:29:23 by amura             #+#    #+#             */
+/*   Updated: 2023/08/15 14:43:48 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-unsigned int	ft_strlcpy(char *dest, char *src, unsigned int size)
+int	src_length(char *str)
 {
-	unsigned int	i;
+	int	i;
 
 	i = 0;
-	while (src[i] && (i < size - 1))
+	while (str[i])
 	{
-		dest[i] = src[i];
 		i++;
 	}
-	dest[i] = '\0';
 	return (i);
+}
+
+char	*ft_strncat(char *dest, char *src, unsigned int nb)
+{
+	unsigned int	i;
+	unsigned int	l;
+
+	i = 0;
+	l = src_length(dest);
+	while (src[i] != '\0' && i < nb)
+	{
+		dest[i + l] = src[i];
+		i++;
+	}
+	dest[i + l] = '\0';
+	return (dest);
 }
