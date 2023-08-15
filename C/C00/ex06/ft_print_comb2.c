@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_print_comb2.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:53:22 by amura             #+#    #+#             */
-/*   Updated: 2023/08/10 22:23:16 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/14 16:56:01 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	print_str(char *str)
+void	print(char *str)
 {
 	while (*str)
 	{
@@ -21,7 +21,7 @@ void	print_str(char *str)
 	}
 }
 
-void	print_int(int i)
+void	print_i(int i)
 {
 	int	temp;
 
@@ -32,30 +32,30 @@ void	print_int(int i)
 		temp = i % 10;
 		temp += '0';
 		i = i / 10;
-		print_int(i);
+		print_i(i);
 	}
 	write(1, &temp, 1);
 }
 
-void	print_result(int i, int j)
+void	print_r(int i, int j)
 {
 	if (i < 10)
 	{
-		print_int(0);
+		print_i(0);
 	}
-	print_int(i);
-	print_str(" ");
+	print_i(i);
+	print(" ");
 	if (j < 10)
 	{
-		print_int(0);
+		print_i(0);
 	}
-	print_int(j);
-	if (i == 99 && j == 99)
+	print_i(j);
+	if (i == 98 && j == 99)
 	{
 	}
 	else
 	{
-		print_str(", ");
+		print(", ");
 	}
 }
 
@@ -66,7 +66,7 @@ void	ft_print_comb2(void)
 
 	i = 0;
 	j = 0;
-	while (i < 100)
+	while (i < 99)
 	{
 		j++;
 		if (j == 100)
@@ -74,8 +74,8 @@ void	ft_print_comb2(void)
 			j = 0;
 			i++;
 		}
-		print_result(i, j);
-		if (i == 99 && j == 99)
+		print_r(i, j);
+		if (i == 98 && j == 99)
 		{
 			break ;
 		}

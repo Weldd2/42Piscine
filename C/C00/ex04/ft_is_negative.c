@@ -3,21 +3,23 @@
 /*                                                        :::      ::::::::   */
 /*   ft_is_negative.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: amura <marvin@42.fr>                       +#+  +:+       +#+        */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/10 18:06:46 by amura             #+#    #+#             */
-/*   Updated: 2023/08/10 18:11:18 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/14 16:50:30 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 void	ft_is_negative(int n)
 {
 	if (n >= 0)
 	{
-		write(1, 'P', 1);
+		write(1, "P", 1);
 	}
 	else
 	{
-		write(1, 'N', 1);
+		write(1, "N", 1);
 	}
 }
