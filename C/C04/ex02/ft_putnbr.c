@@ -1,22 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr.c                                        :+:      :+:    :+:   */
+/*   ft_putnbr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/16 11:05:54 by amura             #+#    #+#             */
-/*   Updated: 2023/08/16 11:08:29 by amura            ###   ########.fr       */
+/*   Created: 2023/08/16 11:10:05 by amura             #+#    #+#             */
+/*   Updated: 2023/08/16 11:10:13 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
-
-void ft_putstr(char *str)
+void	ft_putnbr(int nb)
 {
-	while (*str)
+	int	n;
+	int	temp;
+
+	temp = nb;
+	temp += '0';
+	if (nb < 0)
 	{
-		write(1, str, 1);
-		str++;
+		n = '-';
+		write(1, &n, 1);
+		nb *= -1;
 	}
+	if (nb >= 10)
+	{
+		temp = nb % 10;
+		temp += '0';
+		nb = nb / 10;
+		ft_putnbr(nb);
+	}
+	write(1, &temp, 1);
 }
