@@ -6,34 +6,24 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:51:55 by amura             #+#    #+#             */
-/*   Updated: 2023/08/15 14:28:47 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/16 10:26:46 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	src_length(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
 char	*ft_strcat(char *dest, char *src)
 {
-	int	i;
-	int	l;
+	int				i;
+	unsigned int	dest_length;
 
 	i = 0;
-	l = src_length(dest);
+	dest_length = 0;
+	while (dest[dest_length])
+		dest_length++;
 	while (src[i] != '\0')
 	{
-		dest[i + l] = src[i];
+		dest[i + dest_length] = src[i];
 		i++;
 	}
-	dest[i + l] = '\0';
+	dest[i + dest_length] = '\0';
 	return (dest);
 }

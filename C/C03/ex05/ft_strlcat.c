@@ -6,36 +6,30 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:04:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/15 18:51:45 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/16 10:19:34 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	string_length(char *str)
-{
-	int	i;
-
-	i = 0;
-	while (str[i])
-	{
-		i++;
-	}
-	return (i);
-}
-
-unsigned int ft_strlcat(char *dest, char *src, unsigned int size)
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 {
 	unsigned int	i;
-	int	l;
-	int	r;
-	
+	unsigned int	dest_length;
+	unsigned int	src_length;
+
+	src_length = 0;
+	dest_length = 0;
 	i = 0;
-	l = string_length(dest);
-	r = string_length(dest) + string_length(src);
-	while (src[i] != '\0' && (size -1) > i)
+	while (dest[dest_length])
+		dest_length++;
+	while (src[src_length])
+		src_length++;
+	if (size == 0)
+		return (src_length);
+	while (src[i] != '\0' && (dest_length + i) < size - 1)
 	{
-		dest[i + l] = src[i];
+		dest[dest_length + i] = src[i];
 		i++;
 	}
-	dest[i + l] = '\0';
-	return (r);
+	dest[i + dest_length] = '\0';
+	return (dest_length + src_length);
 }
