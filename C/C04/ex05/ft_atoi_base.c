@@ -6,46 +6,47 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 12:53:51 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 16:53:21 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <stdio.h>
+#include <unistd.h>
 
-int	ft_atoi_2(char *str)
+int	get_place(char c, char *base)
 {
-	int	r;
-	int	signe;
-	int	chiffre;
+	int	i;
 
-	signe = 1;
-	chiffre = 0;
-	r = 0;
-	while (*str)
+	i = 0;
+	while(base[i])
 	{
-		r *= 10;
-		if (*str == ' ' && !chiffre) {}
-		if (*str == '-' && !chiffre)
-			signe *= -1;
-		else if (*str <= '9' && *str >= '0')
-		{
-			chiffre = 1;
-			r += (*str - '0');
-		} else break;
-		str++;
+		if(base[i] == c)
+			return (i);
+		i++;
 	}
-	return (r * signe);
+	return (-1);
+}
+
+int	ft_atoi_loop(char *str, char* base, int signe, int resultat)
+{
+	int	base_length;
+
+	base_length = 0;
+	while (base[base_length])
+		base_length++;
+
+	if(*str == '-' && resultat == 0)
+		return (ft_atoi_loop(str + 1, base, signe *= -1, resultat));
+	if(((*str >= 9 && *str <= 13) || *str == ' ' || *str == '+') && resultat == 0)
+		return (ft_atoi_loop(str + 1, base, signe, resultat));
+	if(get_place(*str, base) != -1)
+	{
+		resultat *= base_length;
+		return (ft_atoi_loop(str + 1, base, signe, resultat + get_place(*str, base)));
+	}
+	return (resultat * signe);
 }
 
 int	ft_atoi_base(char *str, char *base)
 {
-	base = (void*) base;
-	return (ft_atoi_2(str));
-}
-
-#include <stdio.h>
-int	main(void)
-{
-	printf("%d", ft_atoi_base("-450", "s"));
-	
+	return (ft_atoi_loop(str, base, 1, 0));
 }
