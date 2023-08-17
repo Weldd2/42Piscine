@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:10:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 22:54:59 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 22:56:06 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,26 +73,4 @@ char *ft_strjoin(int size, char **strs, char *sep)
 	}
 	str[full_length] = '\0';
 	return (str);
-}
-
-
-#include <stdio.h>
-#include <unistd.h>
-int	main(void)
-{
-	char src[10] = "test";
-	char dest[10] = "test";
-	char *sep = " || ";
-	char *strs[2];
-
-	strs[0] = src;
-	strs[1] = dest;
-
-	char *result;
-	
-	strs[0] = src;
-	strs[1] = dest;
-	result = ft_strjoin(2, strs, sep);
-	write(1, result, ft_strlen(result));
-	free(result);
 }
