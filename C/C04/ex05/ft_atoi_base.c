@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 16:53:21 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 16:55:27 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,33 +17,32 @@ int	get_place(char c, char *base)
 	int	i;
 
 	i = 0;
-	while(base[i])
+	while (base[i])
 	{
-		if(base[i] == c)
+		if (base[i] == c)
 			return (i);
 		i++;
 	}
 	return (-1);
 }
 
-int	ft_atoi_loop(char *str, char* base, int signe, int resultat)
+int	ft_atoi_loop(char *str, char *base, int signe, int r)
 {
 	int	base_length;
 
 	base_length = 0;
 	while (base[base_length])
 		base_length++;
-
-	if(*str == '-' && resultat == 0)
-		return (ft_atoi_loop(str + 1, base, signe *= -1, resultat));
-	if(((*str >= 9 && *str <= 13) || *str == ' ' || *str == '+') && resultat == 0)
-		return (ft_atoi_loop(str + 1, base, signe, resultat));
-	if(get_place(*str, base) != -1)
+	if (*str == '-' && r == 0)
+		return (ft_atoi_loop(str + 1, base, signe *= -1, r));
+	if (((*str >= 9 && *str <= 13) || *str == ' ' || *str == '+') && r == 0)
+		return (ft_atoi_loop(str + 1, base, signe, r));
+	if (get_place(*str, base) != -1)
 	{
-		resultat *= base_length;
-		return (ft_atoi_loop(str + 1, base, signe, resultat + get_place(*str, base)));
+		r *= base_length;
+		return (ft_atoi_loop(str + 1, base, signe, r + get_place(*str, base)));
 	}
-	return (resultat * signe);
+	return (r * signe);
 }
 
 int	ft_atoi_base(char *str, char *base)
