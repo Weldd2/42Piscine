@@ -1,16 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_base.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 12:54:10 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 12:54:32 by amura            ###   ########.fr       */
+/*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
+/*   Updated: 2023/08/17 12:53:51 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str)
+#include <stdio.h>
+
+int	ft_atoi_2(char *str)
 {
 	int	r;
 	int	signe;
@@ -33,4 +35,17 @@ int	ft_atoi(char *str)
 		str++;
 	}
 	return (r * signe);
+}
+
+int	ft_atoi_base(char *str, char *base)
+{
+	base = (void*) base;
+	return (ft_atoi_2(str));
+}
+
+#include <stdio.h>
+int	main(void)
+{
+	printf("%d", ft_atoi_base("-450", "s"));
+	
 }
