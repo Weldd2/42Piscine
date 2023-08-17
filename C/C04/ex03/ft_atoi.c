@@ -6,61 +6,80 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:43:33 by amura             #+#    #+#             */
-/*   Updated: 2023/08/16 12:12:15 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 09:44:22 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include <unistd.h>
 
-char*	parse_number(char *str, int compteur, int positif, int chiffre)
+long long	power (long base, int exposant)
 {
-	if (*str != '\0')
-	{	
-		if (chiffre == 0)
-		{
-			if (*str == ' ')
-				parse_number(str + 1, compteur + 1, positif, chiffre);
-			if (*str == '+')
-				parse_number(str + 1, compteur + 1, 1, chiffre);
-			if (*str == '-')
-			{
-				if (positif == 0)
-					parse_number(str + 1, compteur + 1, 1, chiffre);
-				else
-					parse_number(str + 1, compteur + 1, 0, chiffre);
-			}
-			if (*str > '0' || *str < '9')
-			{
+	int	i;
+	long long	resultat;
 
-				write(1, &str, 1);
-				parse_number(str + 1, compteur + 1, 0, 1);
-			}
-		}
-		else
-		{
-			if (*str > '0' || *str < '9')
-			{
-				write(1, &str, 1);	
-				parse_number(str + 1, compteur + 1, 0, 1);
-			}
-			else
-				return "";
-		}
+	i = 0;
+	resultat = 1;
+	while (i < exposant)
+	{
+		resultat *= base;
+		i++;
 	}
-	return ("");
+	return (resultat);
+}
+
+int c_t_i(char c)
+{
+	return (c - '0');
+}
+
+int	parse_number(char *str, int somme, int positif, int compteur, int str_length, int chiffre)
+{
+	if(compteur < str_length)
+	{
+		if (!chiffre)
+		{
+			if (str[compteur] == ' ')
+				return (parse_number(str, somme, positif, compteur + 1, str_length, chiffre));
+			if (str[compteur] == '-')
+				return (parse_number(str, somme, positif * -1, compteur + 1, str_length, chiffre));
+			if (str[compteur] <= '9' && str[compteur] >= '0')
+				return (parse_number(str, (c_t_i(str[compteur]) * power(10, str_length - compteur - 1)) + somme, positif, compteur + 1, str_length, 1));
+		}
+		else if (str[compteur] <= '9' && str[compteur] >= '0')
+			return (parse_number(str, (c_t_i(str[compteur]) * power(10, str_length - compteur - 1)) + somme, positif, compteur + 1, str_length, 1));
+	}
+	return somme * positif;
 }
 
 int	ft_atoi(char *str)
 {
-	parse_number(str, 0, 1, 0);
-	return (0);
+	unsigned int	l;
+	
+	l = 0;
+	while (str[l] == ' ' || str[l] == '-' || str[l] == '+')
+		l++;
+	while ((str[l] <= '9' && str[l] >= '0'))
+		l++;
+	return (parse_number(str, 0, 1, 0, l, 0));
 }
 
-#include <stdio.h>
 int	main(void)
 {
 	char *str;
 
-	str = "1234";
-	ft_atoi(str);
+	str = "123456";
+	printf("test de : %s, resultat : %d\n", str, ft_atoi(str));
+
+	str = "   123456";
+	printf("test de : %s, resultat : %d\n", str, ft_atoi(str));
+
+	str = "   -123456";
+	printf("test de : %s, resultat : %d\n", str, ft_atoi(str));
+
+	str = "   --123456";
+	printf("test de : %s, resultat : %d\n", str, ft_atoi(str));
+
+	str = "   --1234+56dasd";
+	printf("test de : %s, resultat : %d\n", str, ft_atoi(str));
 }

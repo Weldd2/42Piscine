@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 13:38:20 by amura             #+#    #+#             */
-/*   Updated: 2023/08/16 11:00:39 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/16 16:36:00 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	i = 0;
 	if (n == 0)
 		return (0);
-	while ((s1[i] && s2[i]) || i < n)
+	while ((s1[i] || s2[i]) && i < n)
 	{
 		if (s1[i] != s2[i])
 			return (s1[i] - s2[i]);

@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:44:50 by amura             #+#    #+#             */
-/*   Updated: 2023/08/16 10:28:19 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/16 16:34:13 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*ft_strstr(char *str, char *to_find)
 
 	while (*str)
 	{
-		j = 0;
+		j = 1;
 		while (str[j] == to_find[j])
 		{
 			if (to_find[j + 1] == '\0')
