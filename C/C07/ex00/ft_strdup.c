@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:36:43 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 19:42:42 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 20:11:35 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 char	*ft_strdup(char *src)
 {
-	char	*s;
-	int	i;
-	
+	char		*s;
+	int			i;
+
 	i = 0;
 	while (src[i])
 		i++;
@@ -27,6 +27,6 @@ char	*ft_strdup(char *src)
 		s[i] = src[i];
 		i++;
 	}
-	s[i] = '\0';	
+	s[i] = '\0';
 	return (s);
 }
