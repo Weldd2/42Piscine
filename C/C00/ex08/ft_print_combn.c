@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:03:15 by amura             #+#    #+#             */
-/*   Updated: 2023/08/15 11:56:19 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 18:00:20 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,7 @@ int	*ft_nb_slice(int nb, int iteration, int *r)
 void	tab_init(int *tab)
 {
 	int	i;
-	
+
 	i = 0;
 	while (tab[i])
 	{

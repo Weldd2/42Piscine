@@ -1,20 +1,41 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_find_next_prime.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 17:06:26 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 18:01:04 by amura            ###   ########.fr       */
+/*   Created: 2023/08/17 18:07:28 by amura             #+#    #+#             */
+/*   Updated: 2023/08/17 18:13:05 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_iterative_factorial(int nb)
+int	is_prime(int nb)
 {
-	if (nb < 0)
+	int	i;
+
+	i = 2;
+	if (nb == 0 || nb == 0)
 		return (0);
-	if (nb > 1)
-		return (nb * ft_iterative_factorial((nb -1)));
-	return (nb);
+	while (i < nb)
+	{
+		if (nb % i == 0)
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
+int	ft_find_next_prime(int nb)
+{
+	int	i;
+
+	i = nb;
+	while (i)
+	{
+		if (is_prime(i))
+			return (i);
+		i++;
+	}
+	return (-1);
 }

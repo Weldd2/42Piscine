@@ -1,20 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_recursive_factorial.c                           :+:      :+:    :+:   */
+/*   ft_fibonacci.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 17:06:26 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 18:01:04 by amura            ###   ########.fr       */
+/*   Created: 2023/08/17 17:41:09 by amura             #+#    #+#             */
+/*   Updated: 2023/08/17 17:50:43 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_iterative_factorial(int nb)
+int	ft_fibonacci(int index)
 {
-	if (nb < 0)
+	if (index == 0)
 		return (0);
-	if (nb > 1)
-		return (nb * ft_iterative_factorial((nb -1)));
-	return (nb);
+	if (index == 1)
+		return (1);
+	return (ft_fibonacci(index - 1) + ft_fibonacci(index - 2));
 }
