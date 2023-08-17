@@ -6,18 +6,18 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 17:51:18 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 17:58:57 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 22:03:12 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_sqrt(int nb)
 {
-	int	i;
+	unsigned int	i;
 
 	i = 0;
-	while ((i * i) != nb)
+	while ((i * i) != (unsigned)nb)
 	{
-		if (i > nb)
+		if (i > (unsigned)nb)
 			return (0);
 		i++;
 	}

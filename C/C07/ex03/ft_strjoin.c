@@ -6,71 +6,73 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:10:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 21:24:31 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 22:54:59 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-#include <stdlib.h>
-
-// Cette fonction renvoie la longueur d'une chaîne de caractères.
-static int ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
     int i = 0;
 
     while (str[i])
         i++;
-    return i;
+    return (i);
+}
+
+char	*concat_str(char *src, char* dest)
+{
+	int	i;
+	int	dest_length;
+	
+	dest_length = ft_strlen(dest);
+	i = 0;
+	while (src[i] != '\0')
+	{
+		dest[i + dest_length] = src[i];
+		i++;
+	}
+	dest[i + dest_length] = '\0';
+	return (dest);
+}
+
+int	calcul_full_length(int size, char **strs, char *sep)
+{
+	int	i;
+	int	total_length;
+	
+	i = 0;
+	total_length = 0;
+	while (i < size)
+	{
+		total_length += ft_strlen(strs[i]);
+		i++;
+	}
+	total_length += ft_strlen(sep);
+	return (total_length);
 }
 
 char *ft_strjoin(int size, char **strs, char *sep)
 {
-    char *result;
-    int i;
-    int j;
-    int k;
-    int total_length = 0;
+	int	i;
+	char	*str;
+	int	full_length;
 
-    // Si la taille est 0, retourner une chaîne vide.
-    if (size == 0)
-    {
-        result = (char *)malloc(1);
-        result[0] = '\0';
-        return result;
-    }
-
-    // Calculer la longueur totale nécessaire pour le résultat.
-    for (i = 0; i < size; i++)
-    {
-        total_length += ft_strlen(strs[i]);
-    }
-    total_length += ft_strlen(sep) * (size - 1) + 1;  // Pour les séparateurs et le '\0' à la fin.
-
-    result = (char *)malloc(total_length);
-    if (!result)
-        return NULL;
-
-    k = 0;
-    for (i = 0; i < size; i++)
-    {
-        j = 0;
-        while (strs[i][j])
-        {
-            result[k++] = strs[i][j++];
-        }
-        if (i < size - 1)
-        {
-            j = 0;
-            while (sep[j])
-            {
-                result[k++] = sep[j++];
-            }
-        }
-    }
-    result[k] = '\0';
-
-    return result;
+	i = 0;
+	if (!size)
+		return (malloc(0));
+	full_length = calcul_full_length(size, strs, sep);
+	str = malloc(full_length + 1);
+	while(i < size)
+	{
+		concat_str(strs[i], str);
+		if (i != size + 1)
+			concat_str(sep, str);
+		i++;
+	}
+	str[full_length] = '\0';
+	return (str);
 }
 
 
@@ -78,8 +80,8 @@ char *ft_strjoin(int size, char **strs, char *sep)
 #include <unistd.h>
 int	main(void)
 {
-	char *src = "test";
-	char *dest = "test";
+	char src[10] = "test";
+	char dest[10] = "test";
 	char *sep = " || ";
 	char *strs[2];
 

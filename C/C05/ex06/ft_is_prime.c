@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:01:59 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 18:06:48 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 22:08:32 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@ int	ft_is_prime(int nb)
 	int	i;
 
 	i = 2;
-	if (nb == 0 || nb == 0)
+	if (nb == 0 || nb == 1)
 		return (0);
 	while (i < nb)
 	{
@@ -25,3 +25,4 @@ int	ft_is_prime(int nb)
 	}
 	return (1);
 }
+
