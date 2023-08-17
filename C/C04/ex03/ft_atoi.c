@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_save.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 12:54:10 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 12:54:32 by amura            ###   ########.fr       */
+/*   Created: 2023/08/16 11:43:33 by amura             #+#    #+#             */
+/*   Updated: 2023/08/17 14:01:52 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+int	ft_atoi_loop(char *str, int resultat, int signe)
+{
+	if ( (*str <= '\r' && *str >= '\t') || *str == ' ' || *str == '+')
+		return (ft_atoi_loop(str + 1, resultat, signe));
+	if (*str == '-' && resultat == 0)
+		return (ft_atoi_loop(str + 1, resultat, signe * -1));
+	if (*str <= '9' && *str >= '0')
+		return (ft_atoi_loop(str + 1, (resultat * 10) + (*str - '0'), signe));
+	return (resultat * signe);
+}
+
 int	ft_atoi(char *str)
 {
-	int	r;
-	int	signe;
-	int	chiffre;
-
-	signe = 1;
-	chiffre = 0;
-	r = 0;
-	while (*str)
-	{
-		r *= 10;
-		if (*str == ' ' && !chiffre) {}
-		if (*str == '-' && !chiffre)
-			signe *= -1;
-		else if (*str <= '9' && *str >= '0')
-		{
-			chiffre = 1;
-			r += (*str - '0');
-		} else break;
-		str++;
-	}
-	return (r * signe);
+	return (ft_atoi_loop(str, 0, 1));
 }
