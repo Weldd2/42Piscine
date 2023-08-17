@@ -6,13 +6,13 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:05:54 by amura             #+#    #+#             */
-/*   Updated: 2023/08/16 11:08:29 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/17 09:46:30 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void ft_putstr(char *str)
+void	ft_putstr(char *str)
 {
 	while (*str)
 	{
