@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:10:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 23:00:52 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/18 11:16:15 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,7 +64,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 	if (!size)
 		return (malloc(0));
 	full_length = calcul_full_length(size, strs, sep);
-	str = malloc(full_length + 1);
+	str = malloc(sizeof(char) * (full_length) + 1);
 	while (i < size)
 	{
 		concat_str(strs[i], str);

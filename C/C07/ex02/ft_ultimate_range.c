@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:50:40 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 21:01:52 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/18 11:15:43 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ int	ft_ultimate_range(int **range, int min, int max)
 		*range = NULL;
 		return (0);
 	}
-	*range = malloc(size * 4);
+	*range = malloc(size * sizeof(int));
 	if (!(*range))
 		return (-1);
 	i = 0;

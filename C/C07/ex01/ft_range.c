@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:43:24 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 20:12:23 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/18 11:15:29 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	*ft_range(int min, int max)
 	size = max - min - 2;
 	if (size <= 0)
 		return (NULL);
-	tab = malloc(size * 4);
+	tab = malloc(sizeof(int) * size);
 	if (!tab)
 		return (NULL);
 	i = 0;

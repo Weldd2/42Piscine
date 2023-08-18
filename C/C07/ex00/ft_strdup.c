@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:36:43 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 20:11:35 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/18 11:15:07 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*ft_strdup(char *src)
 	i = 0;
 	while (src[i])
 		i++;
-	s = malloc(i + 1);
+	s = malloc(sizeof(char) * (i + 1));
 	i = 0;
 	while (src[i])
 	{

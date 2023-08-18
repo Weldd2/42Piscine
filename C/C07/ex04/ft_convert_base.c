@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 22:57:25 by amura             #+#    #+#             */
-/*   Updated: 2023/08/18 00:13:35 by amura            ###   ########.fr       */
+/*   Created: 2023/08/18 12:40:16 by amura             #+#    #+#             */
+/*   Updated: 2023/08/18 13:03:19 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 int	get_place(char c, char *base)
 {
@@ -26,56 +27,88 @@ int	get_place(char c, char *base)
 	return (-1);
 }
 
-int	get_str_length(char *base)
+long long	convert_from(char *nbr, char *bf, int p)
 {
-	int	bl;
+	int		bl;
+	long long	r;
 
+	r = 0;
 	bl = 0;
-	while (base[bl])
+	while (bf[bl])
 		bl++;
-	return (bl);
-}
-
-int	convert_from(char *nbr, char *bf, int p, int r)
-{
-	int	bl;
-
-	bl = get_str_length(bf);
-	if (*nbr == '-' && r == 0)
-		return (convert_from(nbr + 1, bf, p *= -1, r));
-	if (((*nbr >= 9 && *nbr <= 13) || *nbr == ' ' || *nbr == '+') && r == 0)
-		return (convert_from(nbr + 1, bf, p, r));
-	if (get_place(*nbr, bf) != -1)
+	if (*nbr == '-' || ((*nbr >= 9 && *nbr <= 13) 
+			|| *nbr == ' ' || *nbr == '+'))
 	{
-		r *= bl;
-		return (convert_from(nbr + 1, bf, p, r + get_place(*nbr, bf)));
+		if (*nbr == '-')
+			p *= -1;
+		return (convert_from(nbr + 1, bf, p));
+	}
+	while (*nbr && get_place(*nbr, bf) != -1)
+	{
+		r = r * bl + get_place(*nbr, bf);
+		nbr++;
 	}
 	return (r * p);
 }
 
-char	*convert_to(int nb, char *base_to, char *r)
+int	is_valid(char *base)
 {
+	int	base_length;
+	int	i;
+
+	base_length = -1;
+	while (base[++base_length])
+	{
+		i = base_length;
+		while (base[i++])
+			if (base[i] == base[base_length] 
+				|| base[i] == '+' || base[i] == '-')
+				return (0);
+	}
+	if (base_length <= 1)
+		return (0);
+	return (base_length);
+}
+
+char	*convert_to(int nb, char *base_to)
+{
+	int	i;
 	int	bl;
+	int	length;
+	int	temp_nb;
+	char	*result;
 
-	bl = get_str_length(base_to);
-	if (nb >= bl)
-		convert_to(nb / bl, base_to, r + 1);
-	*r = base_to[nb % bl];
-	return (r);
+	bl = 0;
+	while (base_to[bl])
+		bl++;
+	length = 1;
+	temp_nb = nb;
+	while (temp_nb >= bl)
+	{
+		length++;
+		temp_nb /= bl;
+	}
+	result = malloc((length + 1) * sizeof(char));
+	if (!result)
+		return (NULL);
+	i = length - 1;
+	result[length] = '\0';
+	while (nb >= bl)
+	{
+		result[i--] = base_to[nb % bl];
+		nb /= bl;
+	}
+	result[i] = base_to[nb % bl];
+	return (result);
 }
 
-char *ft_convert_base(char *nbr, char *base_from, char *base_to)
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
-	int	nb;
-	char	*r;
-	
-	r = malloc(get_str_length(nbr) / get_str_length(base_to) + 1);
-	nb = convert_from(nbr, base_from, 1, 0);
-	return (convert_to(nb, base_to, r));
+	long long	nb;
+
+	if (!(is_valid(base_from) && is_valid(base_to)))
+		return (NULL);
+	nb = convert_from(nbr, base_from, 1);
+	return (convert_to(nb, base_to));
 }
 
-#include <stdio.h>
-int	main(void)
-{
-	printf("%s", ft_convert_base("140", "0123456789", "0123456789abcdef"));
-}
