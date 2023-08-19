@@ -291,6 +291,38 @@ int	optimizer(int board[6][6])
 	}
 }
 
+int solve(int board[6][6], int row, int col) {
+    if (row == 5) // If we have finished the last row
+        return is_board_finished(board);
+
+    if (board[row][col] != 0) { // If the cell is pre-filled, move to the next cell
+        if (col == 4) { // If it's the last column, move to the next row
+            if (solve(board, row + 1, 1))
+                return 1;
+        } else { // Move to the next column
+            if (solve(board, row, col + 1))
+                return 1;
+        }
+        return 0;
+    }
+
+    for (int num = 1; num <= 4; num++) {
+        board[row][col] = num;
+        if (is_board_finished(board)) { // If the current board state is valid
+            if (col == 4) { // If it's the last column, move to the next row
+                if (solve(board, row + 1, 1))
+                    return 1;
+            } else { // Move to the next column
+                if (solve(board, row, col + 1))
+                    return 1;
+            }
+        }
+        board[row][col] = 0; // Backtrack
+    }
+
+    return 0; // No valid number can be placed in this cell
+}
+
 int main(int argc, char **argv) {
 
 	if (argc != 2)
@@ -300,24 +332,27 @@ int main(int argc, char **argv) {
 	int *arg_tab = get_params(argv[1]);
 	initBoard(board, arg_tab);
 	free(arg_tab);
-	board[1][1] = 1;
-	board[1][2] = 2;
-	board[1][3] = 4;
-	board[1][4] = 3;
-	board[2][1] = 4;
-	board[2][2] = 3;
-	board[2][3] = 1;
-	board[2][4] = 2;
-	board[3][1] = 2;
-	board[3][2] = 4;
-	board[3][3] = 3;
-	board[3][4] = 1;
-	board[4][1] = 3;
-	board[4][2] = 1;
-	board[4][3] = 2;
-	board[4][4] = 4;
+	// board[1][1] = 1;
+	// board[1][2] = 2;
+	// board[1][3] = 4;
+	// board[1][4] = 3;
+	// board[2][1] = 4;
+	// board[2][2] = 3;
+	// board[2][3] = 1;
+	// board[2][4] = 2;
+	// board[3][1] = 2;
+	// board[3][2] = 4;
+	// board[3][3] = 3;
+	// board[3][4] = 1;
+	// board[4][1] = 3;
+	// board[4][2] = 1;
+	// board[4][3] = 2;
+	// board[4][4] = 4;
+	print_board(board);
+	printf("\n");
 	optimizer(board);
-	print_board_with_indices(board);
+	solve(board, 1, 1);
+	print_board(board);
 	// print_board(board);
 
 	printf("\n%d\n", is_board_finished(board));
