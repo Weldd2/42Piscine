@@ -8,6 +8,8 @@ enum e_Direction {
     BOTTOM
 };
 
+int solve_compteur = 0;
+
 int	is_line_empty(int board[6][6], int coord, enum e_Direction d)
 {
 	for (int i = 1; i <= 4; i++)
@@ -250,8 +252,6 @@ int	optimizer(int board[6][6])
 }
 
 int	solve(int board[6][6], int row, int col) {
-	print_board(board);
-	printf("\n");
     
 	if (row == 5) // If we have finished the last row
 		return is_board_valid(board);
@@ -270,14 +270,15 @@ int	solve(int board[6][6], int row, int col) {
 	for (int num = 1; num <= 4; num++) {
 		board[row][col] = num;
 		if (is_board_valid(board)) { // If the current board state is valid
-		if (col == 4) { // If it's the last column, move to the next row
-			if (solve(board, row + 1, 1))
-			return 1;
-		} else { // Move to the next column
-			if (solve(board, row, col + 1))
-			return 1;
+			if (col == 4) { // If it's the last column, move to the next row
+				if (solve(board, row + 1, 1))
+					return 1;
+			} else { // Move to the next column
+				if (solve(board, row, col + 1))
+				return 1;
+			}
 		}
-		}
+		solve_compteur++;
 		board[row][col] = 0; // Backtrack
 	}
 
@@ -309,9 +310,10 @@ int main(int argc, char **argv) {
 	// board[4][2] = 1;
 	// board[4][3] = 2;
 	// board[4][4] = 4;
-	// optimizer(board);
+	optimizer(board);
 	solve(board, 1, 1);
 	print_board_with_indices(board);
+	printf("%d\n", solve_compteur);
 	// print_board(board);
 
 	// printf("\n%d\n", is_line_empty(board, 2, TOP));
