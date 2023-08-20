@@ -15,7 +15,7 @@ int	is_line_empty(int board[6][6], int coord, enum e_Direction d)
 		if (d == RIGHT || d == LEFT)
 			if (board[coord][i] == 0)
 				return (1);
-		else if (d == TOP || d == BOTTOM)
+		if (d == TOP || d == BOTTOM)
 			if (board[i][coord] == 0)
 				return (1);
 		
@@ -104,98 +104,6 @@ int	get_building_indice(int board[6][6], int coord, enum e_Direction d)
 		return (board[5][coord]);
 }
 
-int	is_column_valid_indice_top(int board[6][6], int x)
-{
-	int	compteur;
-	int	max;
-
-	max = board[1][x];
-	compteur = 1;
-	if (is_line_empty(board, x, TOP))
-		return (1);
-	//check les indices haut en bas
-	for (int y = 1; y < 4; y++)
-		// check les indices
-		if ( max <  board[y + 1][x])
-		{
-			max = board[y + 1][x];
-			compteur++;
-		}
-	if (compteur != get_building_indice(board, x, TOP))
-		return (0);
-	return (1);
-}
-
-int	is_column_valid_indice_bottom(int board[6][6], int x)
-{
-	int	compteur;
-	int	max;
-
-	compteur = 1;
-	max = board[4][x];
-	if (is_line_empty(board, x, BOTTOM))
-		return (1);
-	//check les indices bas en haut
-	for (int y = 4; y > 1; y--)
-	{
-		printf("coucou");
-		if (max < board[y - 1][x])
-		{
-			max = board[y - 1][x];
-			compteur++;
-		}
-	}
-	if (compteur != get_building_indice(board, x, BOTTOM))
-		return (0);
-	return (1);
-}
-
-int	is_line_valid_indice_right(int board[6][6], int y)
-{
-	int	compteur;
-	int	max;
-
-	compteur = 1;
-	if (is_line_empty(board, y, RIGHT))
-		return (1);
-	max = board[y][4];
-	//check les indices haut en bas
-	for (int x = 4; x > 1; x--)
-		// check les indices
-		if ( max <  board[y][x - 1])
-		{
-			max = board[y][x - 1];
-			compteur++;
-		}
-	if (compteur != get_building_indice(board, y, RIGHT))
-		return (0);
-	return (1);
-}
-
-int	is_line_valid_indice_left(int board[6][6], int y)
-{
-	int	compteur;
-	int	max;
-
-	compteur = 1;
-	max = board[y][1];
-	if (is_line_empty(board, y, LEFT))
-		return (1);
-	//check les indices haut en bas
-	for (int x = 1; x < 4; x++)
-	{
-		// check les indices
-		if ( max <  board[y][x + 1])
-		{
-			max = board[y][x + 1];
-			compteur++;
-		}
-	}
-	if (compteur != get_building_indice(board, y, LEFT))
-		return (0);
-	return (1);
-}
-
 int	has_a_doublon(int board[6][6], int coord, enum e_Direction d)
 {
 	for (int x = 1; x <= 4; x++)
@@ -204,52 +112,87 @@ int	has_a_doublon(int board[6][6], int coord, enum e_Direction d)
 		{
 			if (d == RIGHT || d == LEFT)
 			{
-				if (board[coord][x] != 0)
-				{
-					if (board[coord][x] == board[coord][z] && board[coord][z] != 0)
-						return (0);
-				}
-				else
-				{
-					break;
-				}
+				if (board[coord][x] == board[coord][z])
+					return (0);
+				
 			}
 			else if (d == TOP || d == BOTTOM)
 			{
-				if (board[x][coord] != 0)
-				{
-					if (board[x][coord] == board[z][coord] && board[z][coord] != 0)
-						return (0);
-				}
-				else
-				{
-					break;
-				}
+				if (board[x][coord] == board[z][coord])
+					return (0);
 			}
 		}
 	}
 	return (1);
 }
 
+int	is_indice_valid(int board[6][6], int coord, enum e_Direction d)
+{
+	int	compteur;
+	int	max;
+
+	compteur = 1;
+	if (d == LEFT)
+		max = board[coord][1];
+	if (d == RIGHT)
+		max = board[coord][4];
+	if (d == TOP)
+		max = board[1][coord];
+	if (d == BOTTOM)
+		max = board[4][coord];
+	for (int x = 1; x < 4; x++)
+	{
+		if ( d == LEFT && (max <  board[coord][x + 1]))
+		{
+			max = board[coord][x + 1];
+			compteur++;
+		}
+		else if ( d == RIGHT && (max < board[coord][4 - x]))
+		{
+			max = board[coord][4 - x];
+			compteur++;
+		}
+		else if ( d == BOTTOM && (max < board[4 - x][coord]))
+		{
+			max = board[4 - x][coord];
+			compteur++;
+		}
+		else if ( d == TOP && (max < board[x + 1][coord]))
+		{
+			max = board[x + 1][coord];
+			compteur++;
+		}
+	}
+	if (compteur != get_building_indice(board, coord, d))
+		return (0);
+	return (1);
+}
+
 int	is_column_valid(int board[6][6], int x)
 {
-	if (!has_a_doublon(board, x, TOP))
-		return (0);
-	if (!is_column_valid_indice_top(board, x))
-		return (0);
-	if (!is_column_valid_indice_bottom(board, x))
-		return (0);
+	if (!is_line_empty(board, x, TOP))
+	{
+		if (!has_a_doublon(board, x, TOP))
+			return (0);
+		if (!is_indice_valid(board, x, TOP))
+			return (0);
+		if (!is_indice_valid(board, x, BOTTOM))
+			return (0);
+	}
 	return (1);
 }
 
 int	is_line_valid(int board[6][6], int y)
 {
-	if (!has_a_doublon(board, y, RIGHT))
-		return (0);
-	if (!is_line_valid_indice_left(board, y))
-		return (0);
-	if (!is_line_valid_indice_right(board, y))
-		return (0);
+	if (!is_line_empty(board, y, LEFT))
+	{
+		if (!has_a_doublon(board, y, LEFT))
+			return (0);
+		if (!is_indice_valid(board, y, LEFT))
+			return (0);
+		if (!is_indice_valid(board, y, RIGHT))
+			return (0);
+	}
 	return (1);
 }
 
@@ -306,8 +249,9 @@ int	optimizer(int board[6][6])
 	}
 }
 
-int solve(int board[6][6], int row, int col) {
+int	solve(int board[6][6], int row, int col) {
 	print_board(board);
+	printf("\n");
     
 	if (row == 5) // If we have finished the last row
 		return is_board_valid(board);
@@ -351,8 +295,8 @@ int main(int argc, char **argv) {
 	free(arg_tab);
 	// board[1][1] = 1;
 	// board[1][2] = 2;
-	// board[1][3] = 3;
-	// board[1][4] = 4;
+	// board[1][3] = 4;
+	// board[1][4] = 3;
 	// board[2][1] = 4;
 	// board[2][2] = 3;
 	// board[2][3] = 1;
@@ -365,14 +309,12 @@ int main(int argc, char **argv) {
 	// board[4][2] = 1;
 	// board[4][3] = 2;
 	// board[4][4] = 4;
-	print_board(board);
-	printf("\n");
 	// optimizer(board);
 	solve(board, 1, 1);
 	print_board_with_indices(board);
 	// print_board(board);
 
-	printf("\n%d\n", is_column_valid(board, 1));
+	// printf("\n%d\n", is_line_empty(board, 2, TOP));
 	// printf("\n%d\n", is_board_finished(board));
 
 	return (0);
