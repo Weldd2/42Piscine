@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:26:59 by amura             #+#    #+#             */
-/*   Updated: 2023/08/20 19:50:03 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/20 19:03:07 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,30 +25,19 @@ int	g_solve_compteur = 0;
 
 int	count_valid_digits(char *str)
 {
-	int	i;
 	int	count;
-	int	space_count;
+	int	i;
 
-	i = 0;
 	count = 0;
-	space_count = 0;
-	while (str[i])
+	i = 0;
+	while (str[i] != '\0')
 	{
 		if (str[i] >= '1' && str[i] <= '4')
 		{
 			count++;
-			if (space_count > 1 || (i > 0 && str[i - 1] != ' '))
-				return (-1);
-			space_count = 0;
 		}
-		else if (str[i] == ' ')
-			space_count++;
-		else
-			return (-1);
 		i++;
 	}
-	if (count != 16)
-		return (-1);
 	return (count);
 }
 
@@ -59,16 +48,14 @@ void	fill_array_with_digits(int *result, char *str)
 
 	i = 0;
 	j = 0;
-	if (!(str[i] >= '1' && str[i] <= '4'))
-		return;
 	while (str[i] != '\0')
 	{
 		if (str[i] >= '1' && str[i] <= '4')
+		{
 			result[j++] = str[i] - '0';
+		}
 		i++;
 	}
-	if (!(str[i - 1] >= '1' && str[i - 1] <= '4'))
-		result[j - 1] = -1;
 }
 
 int	*get_params(char *str)
@@ -76,20 +63,13 @@ int	*get_params(char *str)
 	int	count;
 	int	*result;
 
-	if (!str || str[0] == ' ')
+	if (!str)
 		return (NULL);
 	count = count_valid_digits(str);
-	if (count == -1)
-		return (NULL);
 	result = (int *)malloc(count * sizeof(int));
 	if (!result)
 		return (NULL);
 	fill_array_with_digits(result, str);
-	if (result[count - 1] == -1)
-	{
-		free(result);
-		return (NULL);
-	}
 	return (result);
 }
 
@@ -118,8 +98,6 @@ int	main(int argc, char **argv)
 		return (0);
 	create_board(board);
 	arg_tab = get_params(argv[1]);
-	if (arg_tab == NULL)
-		return (0);
 	init_board(board, arg_tab);
 	free(arg_tab);
 	optimizer(board);

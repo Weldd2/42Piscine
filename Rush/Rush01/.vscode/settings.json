@@ -3,6 +3,11 @@
 		"main.h": "c",
 		"board_utilities.h": "c",
 		"stdio.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"globals.h": "c",
+		"board_checking.h": "c",
+		"board_init.h": "c",
+		"board_valid.h": "c",
+		"fill.h": "c"
 	}
 }

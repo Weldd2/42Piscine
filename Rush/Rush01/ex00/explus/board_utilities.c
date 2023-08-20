@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 16:22:34 by amura             #+#    #+#             */
-/*   Updated: 2023/08/20 19:46:01 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/20 19:00:34 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,6 @@ int	get_building_indice(int board[6][6], int coord, enum e_Direction d)
 		return (board[0][coord]);
 	if (d == BOTTOM)
 		return (board[5][coord]);
-	return (0);
 }
 
 int	has_a_doublon(int board[6][6], int coord, enum e_Direction d)

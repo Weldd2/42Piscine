@@ -1,21 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   globals.h                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 16:22:42 by amura             #+#    #+#             */
-/*   Updated: 2023/08/20 19:03:22 by amura            ###   ########.fr       */
+/*   Created: 2023/08/20 18:27:18 by amura             #+#    #+#             */
+/*   Updated: 2023/08/20 19:11:13 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		main(int argc, char **argv);
+#ifndef GLOBALS_H
+#define GLOBALS_H
 
-void	fill_array_with_digits(int *result, char *str);
+extern int	g_solve_compteur;
 
-int		count_valid_digits(char *str);
+enum	e_Direction {
+	RIGHT,
+	TOP,
+	LEFT,
+	BOTTOM
+};
 
-int		*get_params(char *str);
-
-int		is_finished(int board[6][6]);
+#endif

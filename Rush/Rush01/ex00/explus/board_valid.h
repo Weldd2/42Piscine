@@ -1,21 +1,19 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.h                                             :+:      :+:    :+:   */
+/*   board_valid.h                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 16:22:42 by amura             #+#    #+#             */
-/*   Updated: 2023/08/20 19:03:22 by amura            ###   ########.fr       */
+/*   Created: 2023/08/20 18:46:00 by amura             #+#    #+#             */
+/*   Updated: 2023/08/20 18:46:02 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int		main(int argc, char **argv);
+#include "globals.h"
+#include "main.h"
 
-void	fill_array_with_digits(int *result, char *str);
-
-int		count_valid_digits(char *str);
-
-int		*get_params(char *str);
-
-int		is_finished(int board[6][6]);
+int	is_indice_valid(int board[6][6], int coord, enum e_Direction d);
+int	is_column_valid(int board[6][6], int x);
+int	is_line_valid(int board[6][6], int y);
+int	is_board_valid(int board[6][6]);
