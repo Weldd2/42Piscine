@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   main.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/20 13:26:59 by amura             #+#    #+#             */
+/*   Updated: 2023/08/20 13:51:30 by amura            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -285,6 +297,22 @@ int	solve(int board[6][6], int row, int col) {
 	return 0; // No valid number can be placed in this cell
 }
 
+int	is_finished(int board[6][6])
+{
+	int	x;
+
+	x = 1;
+	while(x <= 4)
+	{
+		if (is_line_empty(board, x, TOP))
+			return (0);
+		if (is_line_empty(board, x, LEFT))
+			return (0);
+		x++;
+	}
+	return (1);
+}	
+
 int main(int argc, char **argv) {
 
 	if (argc != 2)
@@ -294,68 +322,15 @@ int main(int argc, char **argv) {
 	int *arg_tab = get_params(argv[1]);
 	initBoard(board, arg_tab);
 	free(arg_tab);
-	// board[1][1] = 1;
-	// board[1][2] = 2;
-	// board[1][3] = 4;
-	// board[1][4] = 3;
-	// board[2][1] = 4;
-	// board[2][2] = 3;
-	// board[2][3] = 1;
-	// board[2][4] = 2;
-	// board[3][1] = 2;
-	// board[3][2] = 4;
-	// board[3][3] = 3;
-	// board[3][4] = 1;
-	// board[4][1] = 3;
-	// board[4][2] = 1;
-	// board[4][3] = 2;
-	// board[4][4] = 4;
 	optimizer(board);
 	solve(board, 1, 1);
-	print_board_with_indices(board);
-	printf("%d\n", solve_compteur);
-	// print_board(board);
-
-	// printf("\n%d\n", is_line_empty(board, 2, TOP));
-	// printf("\n%d\n", is_board_finished(board));
+	if (is_finished(board))
+	{
+		printf("Plateau terminé à l'aide de %d itérations de backtracking.\n", solve_compteur);
+		print_board(board);
+	}
+	else
+		printf("La combinaison donnée n'a pas pu être terminée.\n");
 
 	return (0);
 }
-
-
-
-/*
-void initBoard(int board[6][6], int *params) {
-	int	top = 0;
-	int	left = 8;
-	int	bottom = 4;
-	int	right = 12;
-	
-	for (int i = 0; i < 6; i++) {
-		for (int j = 0; j < 6; j++) {
-			if (i == 0 && (j < 5 && j > 0))
-			{
-				board[i][j] = params[top];
-				top++;
-			}
-			else if (i == 5 && (j < 5 && j > 0))
-			{
-				board[i][j] = params[bottom];
-				bottom++;
-			}
-			else if (j == 5 && (i < 5 && i > 0))
-			{
-				board[i][j] = params[right];
-				right++;
-			}
-			else if (j == 0 && (i < 5 && i > 0))
-			{
-				board[i][j] = params[left];
-				left++;
-			}
-			else
-				board[i][j] = 0;
-		}
-	}
-}
-*/
