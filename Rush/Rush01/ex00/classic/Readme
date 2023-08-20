@@ -1,0 +1,42 @@
+# rush-01
+
+## Chapitre III
+**Exercice : 00**  
+**Dossier de rendu : ex00/**  
+**Fonctions Autorisées :** write, malloc, free
+
+## Description
+Dans cet exercice, vous devez résoudre le jeu "Skyscrapers" sur une grille 4x4. Le but est de placer des caisses de hauteurs différentes (de 1 à 4) de manière à ce que chaque ligne et chaque colonne corresponde aux indices donnés pour chaque vue.
+
+## Compilation
+Utilisez la commande suivante pour compiler :
+```
+gcc main.c board_valid.c board_utilities.c board_checking.c board_init.c backtracking.c fill.c utilities.c
+```
+
+## Utilisation
+Le programme accepte des entrées sous la forme :
+```
+col1up col2up col3up col4up col1down col2down col3down col4down row1left row2left row3left row4left row1right row2right row3right row4right
+```
+
+Exemple d'utilisation :
+```
+./a.out "4 3 2 1 1 2 2 2 4 3 2 1 1 2 2 2"
+```
+
+## Règles
+
+- Chaque vue (deux par ligne et deux par colonne) aura une valeur donnée, allant de 1 à 4. Votre programme doit placer les caisses correctement, tout en faisant attention à n'avoir qu'une seule caisse de chaque hauteur sur chaque ligne et colonne.
+  
+- Si il y a plusieurs solutions, vous devez afficher la première que vous trouverez.
+
+- Le programme doit retourner "Error" suivi d'un retour à la ligne en cas d'erreur ou si aucune solution n'est trouvée.
+
+## Bonus
+
+Si vous voulez des points bonus, essayez de gérer d'autres tailles de map (jusqu'à 9x9).
+
+## Note
+
+Si la partie obligatoire ne passe pas les tests, vous aurez 0.

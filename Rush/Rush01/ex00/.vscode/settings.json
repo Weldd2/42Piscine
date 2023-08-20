@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"globals.h": "c",
+		"fill.h": "c",
+		"backtracking.h": "c"
+	}
+}
