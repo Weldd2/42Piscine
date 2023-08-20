@@ -15,11 +15,12 @@ int	is_line_empty(int board[6][6], int coord, enum e_Direction d)
 		if (d == RIGHT || d == LEFT)
 			if (board[coord][i] == 0)
 				return (1);
-		if (d == TOP || d == BOTTOM)
+		else if (d == TOP || d == BOTTOM)
 			if (board[i][coord] == 0)
 				return (1);
 		
 	}
+	return (0);
 }
 
 void 	createBoard(int board[6][6]) {
@@ -136,12 +137,14 @@ int	is_column_valid_indice_bottom(int board[6][6], int x)
 		return (1);
 	//check les indices bas en haut
 	for (int y = 4; y > 1; y--)
-		// check les indices
-		if ( max <  board[y - 1][x])
+	{
+		printf("coucou");
+		if (max < board[y - 1][x])
 		{
 			max = board[y - 1][x];
 			compteur++;
 		}
+	}
 	if (compteur != get_building_indice(board, x, BOTTOM))
 		return (0);
 	return (1);
@@ -197,20 +200,32 @@ int	has_a_doublon(int board[6][6], int coord, enum e_Direction d)
 {
 	for (int x = 1; x <= 4; x++)
 	{
-		for (int z = x + 1; z < 4; z++)	
+		for (int z = x + 1; z <= 4; z++)	
 		{
 			if (d == RIGHT || d == LEFT)
+			{
 				if (board[coord][x] != 0)
-					if ((board[coord][x] == board[coord][z]) && board[coord][z] != 0)
+				{
+					if (board[coord][x] == board[coord][z] && board[coord][z] != 0)
 						return (0);
+				}
 				else
+				{
 					break;
-			if (d == TOP || d == BOTTOM)
+				}
+			}
+			else if (d == TOP || d == BOTTOM)
+			{
 				if (board[x][coord] != 0)
-					if ((board[x][coord] == board[z][coord]) && board[z][coord] != 0)
+				{
+					if (board[x][coord] == board[z][coord] && board[z][coord] != 0)
 						return (0);
+				}
 				else
+				{
 					break;
+				}
+			}
 		}
 	}
 	return (1);
@@ -238,7 +253,7 @@ int	is_line_valid(int board[6][6], int y)
 	return (1);
 }
 
-int	is_board_finished(int board[6][6])
+int	is_board_valid(int board[6][6])
 {
 	for (int y = 1; y <= 4; y++) {
 		if (!is_line_valid(board, y))
@@ -292,35 +307,37 @@ int	optimizer(int board[6][6])
 }
 
 int solve(int board[6][6], int row, int col) {
-    if (row == 5) // If we have finished the last row
-        return is_board_finished(board);
+	print_board(board);
+    
+	if (row == 5) // If we have finished the last row
+		return is_board_valid(board);
 
-    if (board[row][col] != 0) { // If the cell is pre-filled, move to the next cell
-        if (col == 4) { // If it's the last column, move to the next row
-            if (solve(board, row + 1, 1))
-                return 1;
-        } else { // Move to the next column
-            if (solve(board, row, col + 1))
-                return 1;
-        }
-        return 0;
-    }
+	if (board[row][col] != 0) { // If the cell is pre-filled, move to the next cell
+		if (col == 4) { // If it's the last column, move to the next row
+		if (solve(board, row + 1, 1))
+			return 1;
+		} else { // Move to the next column
+		if (solve(board, row, col + 1))
+			return 1;
+		}
+		return 0;
+	}
 
-    for (int num = 1; num <= 4; num++) {
-        board[row][col] = num;
-        if (is_board_finished(board)) { // If the current board state is valid
-            if (col == 4) { // If it's the last column, move to the next row
-                if (solve(board, row + 1, 1))
-                    return 1;
-            } else { // Move to the next column
-                if (solve(board, row, col + 1))
-                    return 1;
-            }
-        }
-        board[row][col] = 0; // Backtrack
-    }
+	for (int num = 1; num <= 4; num++) {
+		board[row][col] = num;
+		if (is_board_valid(board)) { // If the current board state is valid
+		if (col == 4) { // If it's the last column, move to the next row
+			if (solve(board, row + 1, 1))
+			return 1;
+		} else { // Move to the next column
+			if (solve(board, row, col + 1))
+			return 1;
+		}
+		}
+		board[row][col] = 0; // Backtrack
+	}
 
-    return 0; // No valid number can be placed in this cell
+	return 0; // No valid number can be placed in this cell
 }
 
 int main(int argc, char **argv) {
@@ -334,8 +351,8 @@ int main(int argc, char **argv) {
 	free(arg_tab);
 	// board[1][1] = 1;
 	// board[1][2] = 2;
-	// board[1][3] = 4;
-	// board[1][4] = 3;
+	// board[1][3] = 3;
+	// board[1][4] = 4;
 	// board[2][1] = 4;
 	// board[2][2] = 3;
 	// board[2][3] = 1;
@@ -350,14 +367,15 @@ int main(int argc, char **argv) {
 	// board[4][4] = 4;
 	print_board(board);
 	printf("\n");
-	optimizer(board);
+	// optimizer(board);
 	solve(board, 1, 1);
-	print_board(board);
+	print_board_with_indices(board);
 	// print_board(board);
 
-	printf("\n%d\n", is_board_finished(board));
+	printf("\n%d\n", is_column_valid(board, 1));
+	// printf("\n%d\n", is_board_finished(board));
 
-	return 0;
+	return (0);
 }
 
 
