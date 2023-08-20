@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 13:26:59 by amura             #+#    #+#             */
-/*   Updated: 2023/08/20 19:50:03 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/20 19:51:41 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ void	fill_array_with_digits(int *result, char *str)
 	i = 0;
 	j = 0;
 	if (!(str[i] >= '1' && str[i] <= '4'))
-		return;
+		return ;
 	while (str[i] != '\0')
 	{
 		if (str[i] >= '1' && str[i] <= '4')
