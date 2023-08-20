@@ -41,7 +41,7 @@ int	is_line_empty(int board[6][6], int coord, enum e_Direction d)
 	return (0);
 }
 
-void 	createBoard(int board[6][6]) {
+void 	create_board(int board[6][6]) {
 	for (int i = 0; i < 6; i++) {
 		for (int j = 0; j < 6; j++) {
 			board[i][j] = 0;
@@ -98,7 +98,7 @@ void	print_board(int board[6][6]) {
   	}
 }
 
-void	initBoard(int board[6][6], int *params) {
+void	init_board(int board[6][6], int *params) {
     for (int i = 0; i < 6; i++) {
         for (int j = 0; j < 6; j++) {
             if (i == 0 && j > 0 && j < 5) board[i][j] = params[i + j - 1];
@@ -371,13 +371,13 @@ int solve(int board[6][6], int row) {
 int main(int argc, char *argv[]) {
     	// Test
 	if (argc != 2)
-			return (0);
+		return (0);
 	int board[6][6];
-	createBoard(board);
+	create_board(board);
 	int *arg_tab = get_params(argv[1]);
-	initBoard(board, arg_tab);
+	init_board(board, arg_tab);
 	free(arg_tab);
-	optimizer(board);
+	// optimizer(board);
 	solve(board, 1);
 	print_board_with_indices(board);
 	if (is_finished(board))
