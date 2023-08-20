@@ -1,17 +1,21 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/20 13:26:59 by amura             #+#    #+#             */
-/*   Updated: 2023/08/20 14:41:32 by amura            ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include <stdio.h>
 #include <stdlib.h>
+
+// Définition des constantes
+#define PAIR_COUNT 9
+#define MAX_COMBINATIONS 5
+#define NUM_CELLS 4
+
+// Définir la structure pour une paire d'indices
+typedef struct {
+    int from;
+    int to;
+} Indices;
+
+// Définir la structure pour une combinaison
+typedef struct {
+    int values[NUM_CELLS];
+} Combination;
 
 enum e_Direction {
     RIGHT,
@@ -263,40 +267,6 @@ int	optimizer(int board[6][6])
 	}
 }
 
-int	solve(int board[6][6], int row, int col) {
-    
-	if (row == 5) // If we have finished the last row
-		return is_board_valid(board);
-
-	if (board[row][col] != 0) { // If the cell is pre-filled, move to the next cell
-		if (col == 4) { // If it's the last column, move to the next row
-		if (solve(board, row + 1, 1))
-			return 1;
-		} else { // Move to the next column
-		if (solve(board, row, col + 1))
-			return 1;
-		}
-		return 0;
-	}
-
-	for (int num = 1; num <= 4; num++) {
-		board[row][col] = num;
-		if (is_board_valid(board)) { // If the current board state is valid
-			if (col == 4) { // If it's the last column, move to the next row
-				if (solve(board, row + 1, 1))
-					return 1;
-			} else { // Move to the next column
-				if (solve(board, row, col + 1))
-				return 1;
-			}
-		}
-		solve_compteur++;
-		board[row][col] = 0; // Backtrack
-	}
-
-	return 0; // No valid number can be placed in this cell
-}
-
 int	is_finished(int board[6][6])
 {
 	int	x;
@@ -313,24 +283,109 @@ int	is_finished(int board[6][6])
 	return (1);
 }	
 
-int	main(int argc, char **argv) {
+// Tableau pour stocker toutes les combinaisons possibles
+Combination possible_combinations[PAIR_COUNT][MAX_COMBINATIONS] = {
+    {{3, 4, 1, 2}, {2, 1, 4, 3}, {1, 4, 2, 3}, {3, 1, 4, 2}, {3, 2, 4, 1}},
+    {{1, 2, 4, 3}, {1, 3, 4, 2}, {2, 3, 4, 1}},
+    {{3, 4, 2, 1}, {2, 4, 3, 1}, {1, 4, 3, 2}},
+    {{3, 1, 2, 4}, {3, 2, 1, 4}},
+    {{4, 2, 1, 3}, {4, 1, 2, 3}},
+    {{1, 3, 2, 4}, {2, 3, 1, 4}, {2, 1, 3, 4}},
+    {{4, 2, 3, 1}, {4, 1, 3, 2}, {4, 3, 1, 2}},
+    {{1, 2, 3, 4}},
+    {{4, 3, 2, 1}}
+};
 
+// Paires d'indices pour référencer les combinaisons correctes
+Indices pairs[PAIR_COUNT] = {
+    {2, 2},
+    {3, 2},
+    {2, 3},
+    {2, 1},
+    {1, 2},
+    {3, 1},
+    {1, 3},
+    {1 ,4},
+    {4, 1}
+};
+// Tableau pour stocker le nombre de combinaisons pour chaque paire
+int num_combinations[PAIR_COUNT] = {5, 3, 3, 2, 2, 3, 3, 1, 1};
+
+// Fonction pour obtenir les combinaisons basées sur les indices donnés
+Combination* get_possible_combination(int from, int to, int *num_combo) {
+	for (int i = 0; i < PAIR_COUNT; i++) {
+		if (pairs[i].from == from && pairs[i].to == to) {
+			*num_combo = num_combinations[i];
+			return (possible_combinations[i]);
+		}
+	}
+	*num_combo = 0;
+	return NULL; // Si aucune combinaison n'est trouvée
+}
+
+int solve(int board[6][6], int row) {
+
+	// Si on a terminé la dernière rangée
+	if (row == 5) 
+		return is_board_valid(board);
+
+	// Obtenez les combinaisons possibles pour la paire à l'index "row"
+	int num_combinations_for_pair;
+	Combination* combos = get_possible_combination(board[row][0], board[row][5], &num_combinations_for_pair);
+
+	// S'il n'y a pas de combinaisons possibles pour cette paire, retournez 0
+	if (!combos) 
+		return 0;
+
+	for (int i = 0; i < num_combinations_for_pair; i++) {
+		// Placez la combinaison sur le plateau
+		for (int col = 1; col <= 4; col++) {
+			board[row][col] = combos[i].values[col - 1];
+		}
+		print_board(board);
+		printf("\n");
+		solve_compteur++;
+
+		// Si le plateau est valide
+		if (is_board_valid(board)) {
+		// Si c'est la dernière rangée, alors le tableau est résolu
+			if (row == 4) {
+				return 1;
+			} else { // Sinon, passez à la rangée suivante
+				if (solve(board, row + 1)) {
+				return 1;
+				}
+			}
+		}
+
+		// Annulez la dernière combinaison placée (Backtracking)
+		for (int col = 1; col <= 4; col++) {
+			board[row][col] = 0;
+		}
+	}
+
+	return 0; // Aucune combinaison valide ne peut être placée pour cette rangée
+}
+
+
+int main(int argc, char *argv[]) {
+    	// Test
 	if (argc != 2)
-		return (0);
+			return (0);
 	int board[6][6];
 	createBoard(board);
 	int *arg_tab = get_params(argv[1]);
 	initBoard(board, arg_tab);
 	free(arg_tab);
 	optimizer(board);
-	solve(board, 1, 1);
+	solve(board, 1);
+	print_board_with_indices(board);
 	if (is_finished(board))
 	{
 		printf("Plateau terminé à l'aide de %d itérations de backtracking.\n", solve_compteur);
 		print_board(board);
 	}
 	else
-		printf("La combinaison donnée n'a pas pu être terminée.\n");
-
+		printf("La combinaison donnée n'a pas pu être terminée.\n");	
 	return (0);
 }
