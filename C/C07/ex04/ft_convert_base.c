@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:40:16 by amura             #+#    #+#             */
-/*   Updated: 2023/08/18 13:03:19 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/21 10:50:43 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -111,4 +111,3 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	nb = convert_from(nbr, base_from, 1);
 	return (convert_to(nb, base_to));
 }
-
