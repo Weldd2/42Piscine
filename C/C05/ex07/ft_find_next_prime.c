@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 18:07:28 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 22:00:10 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/22 18:03:17 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,4 +38,10 @@ int	ft_find_next_prime(int nb)
 		i++;
 	}
 	return (-1);
+}
+
+#include <stdio.h>
+int	main(void)
+{
+	printf("%d", ft_find_next_prime(2147483645));
 }
