@@ -4,6 +4,7 @@
 		"stdio.h": "c",
 		"unistd.h": "c",
 		"ft_strs_to_tab.h": "c",
-		"string.h": "c"
+		"string.h": "c",
+		"errno.h": "c"
 	}
 }
