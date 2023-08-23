@@ -1,6 +1,6 @@
 all : ft_tail
 
-ft_tail :
+ft_tail : clean
 	cc ft_tail.c ft_funcs.c -o ft_tail
 
 clean :

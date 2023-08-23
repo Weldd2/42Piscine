@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:45:27 by amura             #+#    #+#             */
-/*   Updated: 2023/08/22 23:02:09 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/23 15:46:35 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,83 +17,73 @@ void	print_x_last_bytes(int file, int file_size, int bytes_read)
 {
 	char	buffer[1];
 	int		f_cursor;
-	int		compteur;
 
+	if (bytes_read > file_size)
+		bytes_read = file_size;
 	f_cursor = 0;
-	compteur = 0;
-	while ((compteur = read(file, buffer, 1)) > 0)
+	while (f_cursor < file_size - bytes_read)
 	{
-		f_cursor += compteur;
-		if ((f_cursor > file_size - bytes_read) && (f_cursor < file_size + 1))
-			write(1, buffer, 1);
+		if (read(file, buffer, 1) <= 0)
+			return ;
+		f_cursor++;
+	}
+	while (f_cursor < file_size)
+	{
+		if (read(file, buffer, 1) <= 0)
+			return ;
+		write(1, buffer, 1);
+		f_cursor++;
 	}
 }
 
-int	ft_print_eof_c(char **file_path, int argc, int bytes_read, int arg_index)
+void	print_eof(char *file_name, int bytes_reads)
 {
-	int	file_size;
-	int	i;
 	int	file;
+	int	file_size;
+
+	file_size = 0;
+	file = open(file_name, O_RDONLY);
+	if (!file)
+		return ;
+	file_size = get_file_size(file);
+	close(file);
+	file = open(file_name, O_RDONLY);
+	print_x_last_bytes(file, file_size, bytes_reads);
+	close(file);
+}
+
+int	tail_loop(char **argv, int argc, int opt_index, int bytes_read)
+{
+	int	i;
 
 	i = 0;
-	file_size = 0;
-	while (++i < argc)
+	while (argc > ++i)
 	{
-		if (i != arg_index && i != arg_index + 1)
+		if (i == opt_index || i == opt_index + 1)
+			continue ;
+		if (argc > 4)
 		{
-			print_file_sep_start(file_path[i]);
-			file_size = get_file_size(file_path[i]);
-			file = open(file_path[i], O_RDONLY);
-			if (file < 0)
-				ft_print_error(file_path[i]);
-			print_x_last_bytes(file, file_size, bytes_read);
+			ft_putstr("==>", 1);
+			ft_putstr(argv[i], 1);
+			ft_putstr("<==\n", 1);
 		}
+		print_eof(argv[i], bytes_read);
+		if ((i != argc && argc > 4))
+			ft_putstr("\n", 1);
 	}
-	return (1);
-}
-
-int	ft_get_nbr(char *str, int result)
-{
-	if (*str <= '9' && *str >= '0')
-		return (ft_get_nbr(str + 1, (result * 10) + (*str - '0')));
-	return (result);
-}
-
-int	get_option(char **argv, char char_to_detect, int argc, int *arg_i)
-{
-	int	i;
-	int	str_len;
-	int	r;
-
-	i = -1;
-	while (argv[++i])
-	{
-		str_len = 0;
-		while (argv[i][str_len])
-			str_len++;
-		if (str_len == 2 && (argv[i][0] == '-' && argv[i][1] == char_to_detect)
-			&& (argc > i + 1))
-		{
-			r = ft_get_nbr(argv[i + 1], 0);
-			if (r > 0)
-			{
-				*arg_i = i;
-				return (r);
-			}
-		}
-	}
-	return (0);
 }
 
 int	main(int argc, char *argv[])
 {
-	int	arg_index;
-	int	bytes_read;
+	int	bytes_read;	
+	int	opt_index;
 
 	bytes_read = 0;
-	arg_index = 0;
-	bytes_read = get_option(argv, 'c', argc, &arg_index);
+	opt_index = 0;
+	bytes_read = get_option(argv, 'c', argc, &opt_index);
 	if (bytes_read > 0)
-		ft_print_eof_c(argv, argc, bytes_read, arg_index);
+	{
+		tail_loop(argv, argc, opt_index, bytes_read);
+	}
 	return (0);
 }

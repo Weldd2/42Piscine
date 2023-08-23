@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:28:07 by amura             #+#    #+#             */
-/*   Updated: 2023/08/22 23:04:17 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/23 15:45:12 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,41 +18,50 @@ void	ft_putstr(const char *str, int sortie)
 		write(sortie, str++, 1);
 }
 
-void	ft_print_error(char *file_path)
+int	ft_get_nbr(char *str, int result)
 {
-	ft_putstr("ft_cat: ", STDERR_FILENO);
-	ft_putstr(file_path, STDERR_FILENO);
-	ft_putstr(": ", STDERR_FILENO);
-	ft_putstr(strerror(errno), STDERR_FILENO);
-	ft_putstr("\n", STDERR_FILENO);
+	if (*str <= '9' && *str >= '0')
+		return (ft_get_nbr(str + 1, (result * 10) + (*str - '0')));
+	return (result);
 }
 
-int	get_file_size(char *file_path)
+int	get_option(char **argv, char char_to_detect, int argc, int *index)
 {
-	char	*buffer;
-	int		file_size;
-	int		compteur;
-	int		file;
+	int	i;
+	int	str_len;
+	int	r;
 
-	file_size = 0;
-	buffer = malloc(sizeof(char));
-	file = open(file_path, O_RDONLY);
+	i = 0;
+	while (argv[++i])
+	{
+		str_len = 0;
+		if (argv[i][0] == '-' && argv[i][1] == char_to_detect)
+		{
+			while (argv[i][str_len])
+				str_len++;
+			r = ft_get_nbr(argv[i + 1], 0);
+			if (r > 0)
+			{
+				*index = i;
+				return (r);
+			}
+		}
+	}
+	return (0);
+}
+
+int	get_file_size(int file)
+{
+	int		compteur;
+	int		r;
+	char	buffer[1];
+
+	r = 0;
 	compteur = 1;
-	if (file < 0)
-		ft_print_error(file_path);
 	while (compteur > 0)
 	{
-		compteur = read(file, buffer, sizeof(char));
-		file_size += compteur;
+		compteur = read(file, buffer, sizeof(buffer));
+		r += compteur;
 	}
-	free(buffer);
-	close(file);
-	return (file_size);
-}
-
-void	print_file_sep_start(char *file_path)
-{
-	ft_putstr("==> ", STDOUT_FILENO);
-	ft_putstr(basename(file_path), STDOUT_FILENO);
-	ft_putstr(" <==\n", STDOUT_FILENO);
+	return (r);
 }

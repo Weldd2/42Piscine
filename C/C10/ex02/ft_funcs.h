@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 21:35:47 by amura             #+#    #+#             */
-/*   Updated: 2023/08/22 23:01:58 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/23 15:43:50 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 #include <errno.h>
 #include <libgen.h>
 
+int		get_file_size(int file);
+int		get_option(char **argv, char char_to_detect, int argc, int *index);
+int		ft_get_nbr(char *str, int result);
 void	ft_putstr(const char *str, int sortie);
-void	ft_print_error(char *file_path);
-int		get_file_size(char *file_path);
-void	print_file_sep_start(char *file_path);
