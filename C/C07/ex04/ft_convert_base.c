@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:40:16 by amura             #+#    #+#             */
-/*   Updated: 2023/08/21 10:50:43 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/24 18:34:08 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ int	get_place(char c, char *base)
 
 long long	convert_from(char *nbr, char *bf, int p)
 {
-	int		bl;
+	int			bl;
 	long long	r;
 
 	r = 0;
@@ -72,10 +72,10 @@ int	is_valid(char *base)
 
 char	*convert_to(int nb, char *base_to)
 {
-	int	i;
-	int	bl;
-	int	length;
-	int	temp_nb;
+	int		i;
+	int		bl;
+	int		length;
+	int		temp_nb;
 	char	*result;
 
 	bl = 0;

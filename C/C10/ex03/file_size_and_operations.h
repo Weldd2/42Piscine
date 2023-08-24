@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/24 16:27:20 by amura             #+#    #+#             */
-/*   Updated: 2023/08/24 16:35:11 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/24 18:26:45 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@
 #include "output.h"
 #include "string_memory_manipulation.h"
 
-int     get_file_size(char *file_name, int    *error);
-int     get_total_size(char **argv, int argc, int opt_index);
-char    *fill_tab(int argc, char **argv, char *tab);
-int     get_option(char **argv, char char_to_detect, int *index);
-int     fill_tab_loop_end(int bytes_read, int i, int *file);
+int		get_file_size(char *file_name, int *error);
+int		get_total_size(char **argv, int argc, int opt_index);
+int		get_option(char **argv, char char_to_detect, int *index);
+int		fill_tab_loop_end(int bytes_read, int i, int *file);
+char	*fill_tab(int argc, char **argv, char *tab);

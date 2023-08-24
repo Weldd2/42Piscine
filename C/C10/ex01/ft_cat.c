@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:45:27 by amura             #+#    #+#             */
-/*   Updated: 2023/08/22 18:58:27 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/24 18:30:11 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 #include <fcntl.h>
 #include <errno.h>
 #include <string.h>
-
 
 void	ft_putstr(const char *str, int sortie)
 {
@@ -33,26 +32,31 @@ void	ft_print_error(char *file_path)
 
 int	ft_print_file_content(char **file_path, int size)
 {
-	int fichier;
-	char buffer[128];
-	int	compteur;
-	int	i;
+	int		fichier;
+	int		compteur;
+	int		i;
+	char	buffer[128];
 
 	i = 0;
-	while(++i < size)
+	while (++i < size)
 	{
 		compteur = 0;
 		fichier = open(file_path[i], O_RDONLY);
 		if (fichier < 0)
 			ft_print_error(file_path[i]);
-		while((compteur = read(fichier, buffer, sizeof(buffer))) > 0)
+		while (1)
+		{
+			compteur = read(fichier, buffer, sizeof(buffer));
 			write(1, buffer, compteur);
+			if (compteur < 128)
+				break ;
+		}
 		close(fichier);
 	}
 	return (1);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	ft_print_file_content(argv, argc);
 	return (0);

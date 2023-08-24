@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/22 14:45:27 by amura             #+#    #+#             */
-/*   Updated: 2023/08/22 17:46:01 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/24 18:32:34 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,36 +16,37 @@
 void	ft_putstr(char *str)
 {
 	int	i;
-	
+
 	i = 0;
 	while (str[i])
 	{
-		write(STDERR_FILENO, &str[i] ,1);
+		write(STDERR_FILENO, &str[i], 1);
 		i++;
 	}
 }
 
 int	ft_print_file_content(char *file_path)
 {
-	int fichier;
-	char buffer[128];
-	int	compteur;
+	int		fichier;
+	int		compteur;
+	char	buffer[128];
 
 	compteur = 0;
 	fichier = open(file_path, O_RDONLY);
-	if (fichier < 0) {
+	if (fichier < 0)
 		return (0);
-	}
-	while((compteur = read(fichier, buffer, sizeof(buffer))) > 0)
+	while (1)
 	{
+		compteur = read(fichier, buffer, sizeof(buffer));
 		write(1, buffer, compteur);
+		if (compteur < 128)
+			break ;
 	}
-
 	close(fichier);
 	return (1);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	if (argc == 1)
 		ft_putstr("File name missing.\n");

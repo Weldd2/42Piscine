@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/14 19:03:15 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 18:00:20 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/24 18:37:36 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -93,11 +93,11 @@ void	ft_print_combn(int n)
 		tab_init(tab);
 		
 		ft_nb_slice(i, 0, tab);
-		j = n-1;
+		j = n - 1;
 		bool = 1;
 		while (j >= 0)
 		{
-			if (tab[j] <= tab[j+1])
+			if (tab[j] <= tab[j + 1])
 				bool = 0;
 			j--;
 		}

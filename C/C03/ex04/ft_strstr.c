@@ -6,26 +6,28 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 14:44:50 by amura             #+#    #+#             */
-/*   Updated: 2023/08/16 16:34:13 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/24 18:25:06 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strstr(char *str, char *to_find)
+char	*ft_strstr(char *str, const char *to_find)
 {
+	int	i;
 	int	j;
 
-	while (*str)
+	if (!*to_find)
+		return ((char *)str);
+	i = 0;
+	while (str[i])
 	{
-		j = 1;
-		while (str[j] == to_find[j])
+		j = 0;
+		while (str[i + j] == to_find[j] && to_find[j])
 		{
-			if (to_find[j + 1] == '\0')
-			{
-				return (str);
-			}
 			j++;
+			if (to_find[j] == '\0')
+				return ((char *)&str[i]);
 		}
-		str++;
+		i++;
 	}
 	return (0);
 }
