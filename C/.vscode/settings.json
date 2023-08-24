@@ -5,6 +5,10 @@
 		"unistd.h": "c",
 		"ft_strs_to_tab.h": "c",
 		"string.h": "c",
-		"errno.h": "c"
+		"errno.h": "c",
+		"libgen.h": "c",
+		"main.h": "c",
+		"file_size_and_operations.h": "c",
+		"string_memory_manipulation.h": "c"
 	}
 }
