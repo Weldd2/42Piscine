@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:04:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/24 17:13:40 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/25 10:39:19 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	unsigned int	src_length;
 
 	dest_length = 0;
-	while (dest[dest_length])
+	while (dest[dest_length] && dest_length < size)
 		dest_length++;
 	src_length = 0;
 	while (src[src_length])
@@ -25,7 +25,7 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	if (size <= dest_length)
 		return (size + src_length);
 	i = 0;
-	while (src[i] != '\0' && (dest_length + i) < size - 1)
+	while (src[i] && (dest_length + i) < size - 1)
 	{
 		dest[dest_length + i] = src[i];
 		i++;
@@ -33,3 +33,4 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	dest[i + dest_length] = '\0';
 	return (dest_length + src_length);
 }
+

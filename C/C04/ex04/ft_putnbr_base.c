@@ -6,9 +6,11 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:39:47 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 11:33:43 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/24 22:58:26 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include <unistd.h>
 
 void	ft_putnbr_base_loop(int nbr, char *base, int base_length)
 {

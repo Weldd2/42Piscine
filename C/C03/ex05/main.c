@@ -1,35 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strstr.c                                        :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/15 14:44:50 by amura             #+#    #+#             */
-/*   Updated: 2023/08/25 10:38:06 by amura            ###   ########.fr       */
+/*   Created: 2023/08/25 10:28:52 by amura             #+#    #+#             */
+/*   Updated: 2023/08/25 10:40:39 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-char	*ft_strstr(char *str, char *to_find)
-{
-	int	i;
-	int	j;
+#include <stdio.h>
 
-	if (!to_find[0])
-		return (str);
-	i = 0;
-	while (str[i])
-	{
-		if (str[i] == to_find[0])
-		{
-			j = 0;
-			while (str[i + j] == to_find[j] && to_find[j])
-				j++;
-			if (to_find[j] == '\0')
-				return (&str[i]);
-		}
-		i++;
-	}
+unsigned int	ft_strlcat(char *dest, char *src, unsigned int size);
+
+int		main(void)
+{
+	char			dest[50] = "42 is ";
+	char			src[] = "the answer";
+	unsigned int	size = 50;
+	unsigned int	result;
+
+	result = ft_strlcat(dest, src, size);
+	printf("Résultat : %u\n", result);
+	printf("Chaîne concaténée : %s\n", dest);
 	return (0);
 }
-
