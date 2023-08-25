@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/24 21:12:42 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/25 12:47:03 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,25 @@ int	get_place(char c, char *base)
 		i++;
 	}
 	return (-1);
+}
+
+int	is_valid(char *base)
+{
+	int	base_length;
+	int	i;
+
+	base_length = -1;
+	while (base[++base_length])
+	{
+		i = base_length;
+		while (base[i++])
+			if (base[i] == base[base_length] 
+				|| base[i] == '+' || base[i] == '-' || base[i] == ' ')
+				return (0);
+	}
+	if (base_length <= 1)
+		return (0);
+	return (base_length);
 }
 
 int	ft_atoi_loop(char *str, char *base, int signe, int r)
@@ -47,5 +66,7 @@ int	ft_atoi_loop(char *str, char *base, int signe, int r)
 
 int	ft_atoi_base(char *str, char *base)
 {
-	return (ft_atoi_loop(str, base, 1, 0));
+	if (is_valid(base))
+		return (ft_atoi_loop(str, base, 1, 0));
+	return (0);
 }

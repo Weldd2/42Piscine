@@ -6,13 +6,14 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:43:33 by amura             #+#    #+#             */
-/*   Updated: 2023/08/24 18:12:55 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/25 12:12:34 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_atoi_loop(char *str, int resultat, int signe)
 {
-	if ((*str <= '\r' && *str >= '\t') || *str == ' ' || *str == '+')
+	if (((*str <= '\r' && *str >= '\t') || *str == ' ' || *str == '+') 
+			&& resultat == 0)
 		return (ft_atoi_loop(str + 1, resultat, signe));
 	if (*str == '-' && resultat == 0)
 		return (ft_atoi_loop(str + 1, resultat, signe * -1));
