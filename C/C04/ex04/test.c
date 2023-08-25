@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:38:15 by amura             #+#    #+#             */
-/*   Updated: 2023/08/25 12:42:14 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/25 12:52:24 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 
 void	ft_putnbr_base(int nbr, char *base);
 
-int main(void)
+int	main(void)
 {
 	ft_putnbr_base(-2147483648, "01");
-	return 0;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/25 11:38:15 by amura             #+#    #+#             */
-/*   Updated: 2023/08/25 12:46:43 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/25 12:52:15 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,8 @@
 
 int	ft_atoi_base(char *str, char *base);
 
-int main(void)
+int	main(void)
 {
 	printf("%d\n", ft_atoi_base("100111", "0 1"));
-	
-	return 0;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/15 17:04:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/25 10:39:19 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/25 12:54:50 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,4 +33,3 @@ unsigned int	ft_strlcat(char *dest, char *src, unsigned int size)
 	dest[i + dest_length] = '\0';
 	return (dest_length + src_length);
 }
-
