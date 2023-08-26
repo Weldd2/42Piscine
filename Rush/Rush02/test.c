@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 14:10:55 by amura             #+#    #+#             */
-/*   Updated: 2023/08/26 14:40:29 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/26 20:15:32 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,19 +21,9 @@
 
 // int	main(void)
 // {
-// 	char	**result;
-// 	int		i;
+// 	printf("nb = %d | arg 1 = %d | arg 2 = %d | arg 3 = %d | arg 4 = %d\n", 2200, 2200 / 1000, 1000 / 1000, 2200 % (1000), 100);
+// 	printf("nb = %d | arg 1 = %d | arg 2 = %d | arg 3 = %d | arg 4 = %d\n", 20200, 20200 / 1000, 10000 / 1000, 20200 % (10000), 100);
+// 	printf("nb = %d | arg 1 = %d | arg 2 = %d | arg 3 = %d | arg 4 = %d\n", 200200, 200200 / 1000, 100000 / 1000, 200200 % (100000), 100);
 
-// 	result = ft_split("Bonj\nour to\nut le m\nonde", '\n');
-// 	if (!result)
-// 		return (1);
-// 	i = 0;
-// 	while (result[i])
-// 	{
-// 		printf("Mot %d: %s\n", i, result[i]);
-// 		free(result[i]); // Libérer chaque chaîne allouée
-// 		i++;
-// 	}
-// 	free(result); // Libérer le tableau lui-même
 // 	return (0);
 // }
