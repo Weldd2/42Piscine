@@ -6,11 +6,11 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:13:16 by amura             #+#    #+#             */
-/*   Updated: 2023/08/26 15:30:50 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/26 20:22:39 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi(char *str, int result)
+int	ft_atoi(char *str, long long result)
 {
 	if (*str <= '9' && *str >= '0')
 		return (ft_atoi(str + 1, (result * 10) + (*str - '0')));

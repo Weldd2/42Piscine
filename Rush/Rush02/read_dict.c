@@ -6,11 +6,11 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:24:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/26 16:18:36 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/26 21:01:36 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "read_dict.h"
+#include "global.h"
 
 int	get_dict_size(char *dict_name)
 {

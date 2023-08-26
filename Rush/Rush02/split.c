@@ -6,11 +6,11 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 14:10:55 by amura             #+#    #+#             */
-/*   Updated: 2023/08/26 15:16:16 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/26 21:01:28 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "split.h"
+#include "global.h"
 
 int	count_words(char *str, char sep)
 {
