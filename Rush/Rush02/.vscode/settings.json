@@ -5,6 +5,8 @@
 		"stdio.h": "c",
 		"read_dict.h": "c",
 		"atoi.h": "c",
-		"stdlib.h": "c"
+		"stdlib.h": "c",
+		"string.h": "c",
+		"fcntl.h": "c"
 	}
 }

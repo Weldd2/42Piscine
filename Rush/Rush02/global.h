@@ -1,8 +1,8 @@
 #ifndef GLOBAL_H
 # define GLOBAL_H
 
-#include <unistd.h>
 #include <fcntl.h>
+#include <unistd.h>
 #include <string.h>
 #include <stdlib.h>
 #include <errno.h>

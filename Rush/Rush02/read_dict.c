@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:24:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/26 15:29:17 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/26 16:18:36 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,5 +76,5 @@ s_couple	*read_dict(char *dict_name)
 		if (compteur == 0)
 			break ;
 	}
-	return fcontent_to_couple(buffer);
+	return (fcontent_to_couple(buffer));
 }
