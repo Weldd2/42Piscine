@@ -1,0 +1,7 @@
+{
+	"files.associations": {
+		"libgen.h": "c",
+		"split.h": "c",
+		"stdio.h": "c"
+	}
+}

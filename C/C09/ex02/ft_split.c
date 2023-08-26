@@ -108,6 +108,6 @@ char	**ft_split(char *str, char *charset)
 		if (index[i + 1])
 			r[i] = get_str_between_indices(str, index[i] + 1, index[i + 1]);
 	}
-	r[i] += '\0';
+	r[i] = '\0';
 	return (r);
 }
