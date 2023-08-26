@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:24:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/26 21:01:36 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 00:00:39 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	get_dict_size(char *dict_name)
 	int		file;
 	int		size;
 	char	buffer[16];
-
 	size = 0;
 	file = open(dict_name, O_RDONLY);
 	if (file < 0)
@@ -28,17 +27,16 @@ int	get_dict_size(char *dict_name)
 	return (size);
 }
 
-s_couple	*fcontent_to_couple(char *str)
+t_couple	*fcontent_to_couple(char *str)
 {
-	s_couple	*couple;
+	t_couple	*couple;
 	char		**result;
 	char		**temp;
 	int			i;
-
 	result = ft_split(str, '\n');
 	if (!result)
 		return (NULL);
-	couple = malloc((32) * sizeof(s_couple));
+	couple = malloc((32) * sizeof(t_couple));
 	if (!couple)
 		return (NULL);
 	i = 0;
@@ -57,14 +55,12 @@ s_couple	*fcontent_to_couple(char *str)
 	free(result);
 	return (couple);
 }
-
-s_couple	*read_dict(char *dict_name)
+t_couple	*read_dict(char *dict_name)
 {
 	int	file;
 	char*	buffer;
 	int	dict_size;
 	int	compteur;
-
 	dict_size = get_dict_size(dict_name);
 	buffer = malloc(sizeof(char) * dict_size);
 	file = open(dict_name, O_RDONLY);
@@ -76,5 +72,6 @@ s_couple	*read_dict(char *dict_name)
 		if (compteur == 0)
 			break ;
 	}
+	return fcontent_to_couple(buffer);
 	return (fcontent_to_couple(buffer));
 }
