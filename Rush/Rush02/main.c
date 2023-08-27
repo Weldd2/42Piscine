@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 22:24:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/27 11:02:39 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 11:31:24 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ int	main(int argc, char **argv)
 		return (0);
 	}
 	print_number(number, couple_array);
+	free(couple_array);
 	write(1, "\n", 1);
 	return (0);
 }

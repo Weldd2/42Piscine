@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 14:10:55 by amura             #+#    #+#             */
-/*   Updated: 2023/08/27 00:01:23 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 11:27:29 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,7 +49,7 @@ char	**ft_split(char *str, char sep)
 	while (i < nb_words)
 	{
 		k = 0;
-		if (!(result[i] = malloc(50 * sizeof(char))))  // Taille fixe pour cet exemple
+		if (!(result[i] = malloc(50 * sizeof(char))))
 			return (NULL);
 		while (str[j] == sep)
 			j++;
