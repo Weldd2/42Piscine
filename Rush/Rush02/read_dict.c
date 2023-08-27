@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:24:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/27 12:13:05 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 14:03:08 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,7 @@ int	get_dict_size(char *dict_name)
 	int		file;
 	int		size;
 	char	buffer[16];
+
 	size = 0;
 	file = open(dict_name, O_RDONLY);
 	if (file < 0)
@@ -62,10 +63,8 @@ t_couple	*fcontent_to_couple(char *str)
 	int			i;
 
 	result = ft_split(str, '\n');
-	if (!result)
-		return (NULL);
 	couple = malloc((1500) * sizeof(t_couple));
-	if (!couple)
+	if (!couple || !result)
 		return (NULL);
 	i = 0;
 	while (result[i])
@@ -86,10 +85,11 @@ t_couple	*fcontent_to_couple(char *str)
 
 t_couple	*read_dict(char *dict_name)
 {
-	int	file;
-	char*	buffer;
-	int	dict_size;
-	int	compteur;
+	int		file;
+	int		dict_size;
+	int		compteur;
+	char	*buffer;
+
 	dict_size = get_dict_size(dict_name);
 	if (dict_size == 0)
 		return (NULL);

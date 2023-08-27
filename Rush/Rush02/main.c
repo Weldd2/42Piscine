@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 22:24:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/27 11:31:24 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 14:41:41 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,19 @@ t_couple	*open_dict(char *str)
 	return (couple_array);
 }
 
-void	ft_print_error(void)
+int	ft_print_error(t_couple	*couple_array, int number)
 {
-	write(2, "Dict Error\n", 12);
+	if (!couple_array)
+	{
+		write(2, "Dict Error", 11);
+		return (1);
+	}
+	if (number < 0)
+	{
+		write(2, "Error", 5);
+		return (1);
+	}
+	return (0);
 }
 
 int	main(int argc, char **argv)
@@ -42,12 +52,8 @@ int	main(int argc, char **argv)
 	}
 	else
 		return (0);
-	if (!couple_array)
-	{
-		ft_print_error();
-		return (0);
-	}
-	print_number(number, couple_array);
+	if (!ft_print_error(couple_array, number))
+		print_number(number, couple_array);
 	free(couple_array);
 	write(1, "\n", 1);
 	return (0);

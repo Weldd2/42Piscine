@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 23:55:34 by amura             #+#    #+#             */
-/*   Updated: 2023/08/26 23:55:55 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 14:31:30 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,15 +44,14 @@ char	*ft_strjoin(char *s1, char *s2)
 	return (result);
 }
 
-void	ft_putstr(char *str) 
+void	ft_putstr(char *str)
 {
 	int	i;
 
 	i = 0;
-	while(str[i])
+	while (str[i])
 	{
 		write(1, &str[i], 1);
 		i++;
 	}
-	write(1, " ", 1);
 }

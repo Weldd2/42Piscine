@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/27 00:00:00 by amura             #+#    #+#             */
-/*   Updated: 2023/08/27 00:01:42 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 14:41:43 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 
-typedef struct	s_couple
+typedef struct s_couple
 {
 	long long	val;
 	char		*str_val;
