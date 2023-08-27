@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/26 15:24:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/27 00:00:39 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/27 11:11:03 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,17 @@ t_couple	*read_dict(char *dict_name)
 	int	dict_size;
 	int	compteur;
 	dict_size = get_dict_size(dict_name);
+	if (dict_size == 0)
+		return (NULL);
 	buffer = malloc(sizeof(char) * dict_size);
 	file = open(dict_name, O_RDONLY);
 	if (!file)
-		return NULL;
+		return (NULL);
 	while (1)
 	{
 		compteur = read(file, buffer, dict_size);
-		if (compteur == 0)
+		if (compteur <= 0)
 			break ;
 	}
-	return fcontent_to_couple(buffer);
 	return (fcontent_to_couple(buffer));
 }
