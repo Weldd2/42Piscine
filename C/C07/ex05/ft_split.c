@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 12:28:11 by amura             #+#    #+#             */
-/*   Updated: 2023/08/21 14:58:49 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/29 00:10:07 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,10 @@ int	*get_index(char *str, char *charset, int *nb_index)
 	int	r_index;
 	int	*r;
 
-	i = -1;
 	r = malloc(sizeof(int) * (ft_str_length(str)) + 1);
-	r_index = 0;
+	r_index = 1;
+	i = 0;
+	r[0] = -1;
 	while (str[++i])
 	{
 		j = -1;
@@ -68,7 +69,8 @@ int	*get_index(char *str, char *charset, int *nb_index)
 			}
 		}
 	}
-	*nb_index = r_index;
+	r[r_index] = i;
+	*nb_index = r_index + 2;
 	return (r);
 }
 

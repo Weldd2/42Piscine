@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:10:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/28 17:43:43 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/28 22:22:19 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ int	get_full_length(int size, char **strs)
 	int	r;
 
 	i = -1;
-	while(++i < size)
+	while (++i < size)
 		r += ft_strlen(strs[i]);
 	return (r);
 }
@@ -62,17 +62,4 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 			concat_str(sep, str);
 	}
 	return (str);
-}
-
-#include <stdio.h>
-int	main(void)
-{
-	char	*strs[5];
-	char	*rep;
-
-	strs[0] = "ab";
-	strs[1] = "cd";
-	strs[2] = "ef";
-	rep = ft_strjoin(3, strs, "--");
-	printf("%s\n", rep);
 }
