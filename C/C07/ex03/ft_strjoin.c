@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:10:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/18 11:16:15 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/28 17:43:43 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,50 +28,51 @@ char	*concat_str(char *src, char *dest)
 	int	dest_length;
 
 	dest_length = ft_strlen(dest);
-	i = 0;
-	while (src[i] != '\0')
-	{
+	i = -1;
+	while (src[++i] != '\0')
 		dest[i + dest_length] = src[i];
-		i++;
-	}
 	dest[i + dest_length] = '\0';
 	return (dest);
 }
 
-int	calcul_full_length(int size, char **strs, char *sep)
+int	get_full_length(int size, char **strs)
 {
 	int	i;
-	int	total_length;
+	int	r;
 
-	i = 0;
-	total_length = 0;
-	while (i < size)
-	{
-		total_length += ft_strlen(strs[i]);
-		i++;
-	}
-	total_length += ft_strlen(sep);
-	return (total_length);
+	i = -1;
+	while(++i < size)
+		r += ft_strlen(strs[i]);
+	return (r);
 }
 
 char	*ft_strjoin(int size, char **strs, char *sep)
 {
 	int		i;
-	int		full_length;
 	char	*str;
 
-	i = 0;
 	if (!size)
 		return (malloc(0));
-	full_length = calcul_full_length(size, strs, sep);
-	str = malloc(sizeof(char) * (full_length) + 1);
-	while (i < size)
+	str = malloc(get_full_length(size, strs));
+	i = -1;
+	while (++i < size)
 	{
 		concat_str(strs[i], str);
-		if (i != size + 1)
+		if (i != size - 1)
 			concat_str(sep, str);
-		i++;
 	}
-	str[full_length] = '\0';
 	return (str);
+}
+
+#include <stdio.h>
+int	main(void)
+{
+	char	*strs[5];
+	char	*rep;
+
+	strs[0] = "ab";
+	strs[1] = "cd";
+	strs[2] = "ef";
+	rep = ft_strjoin(3, strs, "--");
+	printf("%s\n", rep);
 }
