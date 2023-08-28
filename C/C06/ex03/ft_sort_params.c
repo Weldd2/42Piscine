@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 19:18:52 by amura             #+#    #+#             */
-/*   Updated: 2023/08/17 19:31:47 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/28 15:31:43 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,6 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	unsigned int	i;
 
 	i = 0;
-	if (n == 0)
-		return (0);
 	while ((s1[i] || s2[i]) && i < n)
 	{
 		if (s1[i] != s2[i])
@@ -40,26 +38,38 @@ int	ft_strncmp(char *s1, char *s2, unsigned int n)
 	return (0);
 }
 
-int	main(int argc, char *argv[])
+void	ft_sort_params(int argc, char **argv)
 {
 	int		i;
+	int		j;
 	char	*temp;
 
-	if (argc == 1)
-		return (0);
-	i = 1; 
-	while (argv[i + 1])
+	i = 1;
+	while (i < argc - 1)
 	{
-		if (ft_strncmp(argv[i], argv[i + 1], 50) > 0)
+		j = i + 1;
+		while (j < argc)
 		{
-			temp = argv[i + 1];
-			argv[i + 1] = argv[i];
-			argv[i] = temp;
+			if (ft_strncmp(argv[i], argv[j], 50) > 0)
+			{
+				temp = argv[i];
+				argv[i] = argv[j];
+				argv[j] = temp;
+			}
+			j++;
 		}
 		i++;
 	}
+}
+
+int	main(int argc, char *argv[])
+{
+	int	i;
+
+	if (argc > 1)
+		ft_sort_params(argc, argv);
 	i = 1;
-	while (argv[i])
+	while (i < argc)
 	{
 		print(argv[i]);
 		print("\n");

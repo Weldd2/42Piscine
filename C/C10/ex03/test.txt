@@ -1,0 +1,4 @@
+En Inde
+
+Treize (F7) façons d'alterner courtes et longues syllabes dans un vers de six mātrās. Huit (F6) finissent par une courte syllabe et cinq (F5) par une longue syllabe.
+Dans la branche des mathématiques concernant la combinatoire, les mathématiciens indiens s'intéressent à des problèmes de lexicographie et de métrique. Le mètre āryā (en) est composé de syllabes pouvant être brèves (longueur un mātrā, cf. Devanagari#L’alphasyllabaire) ou longues (longueur deux mātrās). La question est de savoir comment peuvent s'alterner les brèves et les longues dans un vers de n mātrās. Ce problème apparaît très tôt en

@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 16:59:27 by amura             #+#    #+#             */
-/*   Updated: 2023/08/23 13:03:27 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/28 14:54:03 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	ft_iterative_factorial(int nb)
 	i = nb;
 	if (i < 0)
 		return (0);
+	if (i == 0 || i == 1)
+		return (1);
 	while (i > 1)
 	{
 		i--;
