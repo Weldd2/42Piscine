@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 20:10:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/28 22:22:19 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/29 15:02:40 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ int	get_full_length(int size, char **strs)
 	int	r;
 
 	i = -1;
+	r = 0;
 	while (++i < size)
 		r += ft_strlen(strs[i]);
 	return (r);
@@ -53,7 +54,7 @@ char	*ft_strjoin(int size, char **strs, char *sep)
 
 	if (!size)
 		return (malloc(0));
-	str = malloc(get_full_length(size, strs));
+	str = malloc(get_full_length(size, strs) + ft_strlen(sep));
 	i = -1;
 	while (++i < size)
 	{

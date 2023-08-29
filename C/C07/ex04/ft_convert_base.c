@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/18 12:40:16 by amura             #+#    #+#             */
-/*   Updated: 2023/08/28 22:23:31 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/29 15:09:33 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,24 +38,27 @@ char	*itoa_base(int nb, char *base, char *r, int i)
 
 int	is_valid_base(char *base)
 {
-	char	*ptr;
-	char	*current;
+	int	i;
+	int	j;
 
-	if (!base || !*base || !*(base + 1))
+	i = -1;
+	while (base[++i])
+		;
+	if (i < 2)
 		return (0);
-	current = base;
-	while (*current != '\0')
+	i = 0;
+	while (base[i + 1])
 	{
-		if (*current == '+' || *current == '-')
-			return (0);
-		ptr = current + 1;
-		while (*ptr != '\0')
+		j = i + 1;
+		while (base[j])
 		{
-			if (*ptr == *current)
+			if (base[i] == base[j] || base[i] == '+' || base[i] == '-'
+				|| base[j] == '+' || base[j] == '-' || base[i] <= ' '
+				|| base[i] > 126 || base[j] <= ' ' || base[j] > 126)
 				return (0);
-			ptr++;
+			j++;
 		}
-		current++;
+		i++;
 	}
 	return (1);
 }
