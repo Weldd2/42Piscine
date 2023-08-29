@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:57:16 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 21:02:55 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/29 22:55:49 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 	int			i;
 
 	i = -1;
-	tab = malloc(sizeof(t_stock_str) * ac + 1);
+	tab = malloc(sizeof(t_stock_str) * (ac + 1));
 	if (!tab)
 		return (NULL);
 	while (++i < ac)
@@ -57,6 +57,6 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 		tab[i].size = str_len(av[i]);
 		tab[i].copy = ft_strdup(tab[i].str);
 	}
-	tab[i].str = '\0';
+	tab[i].str = "";
 	return (tab);
 }

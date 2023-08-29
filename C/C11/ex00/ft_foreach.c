@@ -1,17 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_foreach.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:20:36 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 22:57:22 by amura            ###   ########.fr       */
+/*   Created: 2023/08/29 21:09:14 by amura             #+#    #+#             */
+/*   Updated: 2023/08/29 21:14:00 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchar(char c);
-void	ft_swap(int *a, int *b);
-void	ft_putstr(char *str);
-int		ft_strlen(char *str);
-int		ft_strcmp(char *s1, char *s2);
+void ft_foreach(int *tab, int length, void(*f)(int))
+{
+	int	i;
+	
+	i = -1;
+	while (++i < length)
+	{
+		f(tab[i]);
+	}
+}

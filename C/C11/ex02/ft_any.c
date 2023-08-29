@@ -1,17 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft.h                                               :+:      :+:    :+:   */
+/*   ft_any.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 16:20:36 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 22:57:22 by amura            ###   ########.fr       */
+/*   Created: 2023/08/29 21:19:10 by amura             #+#    #+#             */
+/*   Updated: 2023/08/29 21:28:20 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchar(char c);
-void	ft_swap(int *a, int *b);
-void	ft_putstr(char *str);
-int		ft_strlen(char *str);
-int		ft_strcmp(char *s1, char *s2);
+int	ft_any(char **tab, int (*f)(char *))
+{
+	int	i;
+
+	i = -1;
+	while (tab[++i])
+	{
+		if (f(tab[i]))
+			return (1);
+	}
+	return (0);
+}
+
+int	has_a_a(char *str)
+{
+	int	i;
+	
+	i = -1;
+	while (str[++i])
+	{
+		if (str[i] == 'a')
+			return (1);
+	}
+	return (0);
+}
