@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 10:39:47 by amura             #+#    #+#             */
-/*   Updated: 2023/08/25 12:52:38 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:30:47 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,23 +23,29 @@ void	ft_putnbr_base_loop(long nbr, char *base, int base_length)
 	}
 }
 
-int	is_valid(char *base)
+int	is_valid(char *base, int *bl)
 {
-	int	base_length;
+	int	str_l;
 	int	i;
+	int	j;
 
-	base_length = -1;
-	while (base[++base_length])
+	str_l = 0;
+	while (base[str_l])
+		str_l++;
+	*bl = str_l;
+	if (str_l == 0 || str_l == 1)
+		return (0);
+	i = -1;
+	while (base[++i])
 	{
-		i = base_length;
-		while (base[i++])
-			if (base[i] == base[base_length] 
-				|| base[i] == '+' || base[i] == '-' || base[i] == ' ')
+		if (base[i] == '+' || base[i] == '-' || base[i] == ' ')
+			return (0);
+		j = i;
+		while (base[++j])
+			if (base[i] == base[j])
 				return (0);
 	}
-	if (base_length <= 1)
-		return (0);
-	return (base_length);
+	return (1);
 }
 
 void	ft_putnbr_base(int nbr, char *base)
@@ -48,7 +54,8 @@ void	ft_putnbr_base(int nbr, char *base)
 	long	temp;
 
 	temp = (long)nbr;
-	base_length = is_valid(base);
+	if (!is_valid(base, &base_length))
+		return ;
 	if (!base_length)
 		return ;
 	if (temp < 0)

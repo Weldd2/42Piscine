@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/25 12:47:03 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:30:56 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,57 +16,61 @@ int	get_place(char c, char *base)
 {
 	int	i;
 
-	i = 0;
-	while (base[i])
-	{
+	i = -1;
+	while (base[++i])
 		if (base[i] == c)
 			return (i);
-		i++;
-	}
 	return (-1);
 }
 
-int	is_valid(char *base)
+int	is_valid(char *base, int *bl)
 {
-	int	base_length;
+	int	str_l;
 	int	i;
+	int	j;
 
-	base_length = -1;
-	while (base[++base_length])
+	str_l = 0;
+	while (base[str_l])
+		str_l++;
+	*bl = str_l;
+	if (str_l == 0 || str_l == 1)
+		return (0);
+	i = -1;
+	while (base[++i])
 	{
-		i = base_length;
-		while (base[i++])
-			if (base[i] == base[base_length] 
-				|| base[i] == '+' || base[i] == '-' || base[i] == ' ')
+		if (base[i] == '+' || base[i] == '-' || base[i] == ' ')
+			return (0);
+		j = i;
+		while (base[++j])
+			if (base[i] == base[j])
 				return (0);
 	}
-	if (base_length <= 1)
-		return (0);
-	return (base_length);
-}
-
-int	ft_atoi_loop(char *str, char *base, int signe, int r)
-{
-	int	base_length;
-
-	base_length = 0;
-	while (base[base_length])
-		base_length++;
-	if (*str == '-' && r == 0)
-		return (ft_atoi_loop(str + 1, base, signe *= -1, r));
-	if (((*str >= 9 && *str <= 13) || *str == ' ' || *str == '+') && r == 0)
-		return (ft_atoi_loop(str + 1, base, signe, r));
-	if (get_place(*str, base) != -1)
-	{
-		r *= base_length;
-		return (ft_atoi_loop(str + 1, base, signe, r + get_place(*str, base)));
-	}
-	return (r * signe);
+	return (1);
 }
 
 int	ft_atoi_base(char *str, char *base)
 {
-	if (is_valid(base))
-		return (ft_atoi_loop(str, base, 1, 0));
-	return (0);
+	int	r;
+	int	signe;
+	int	base_l;
+
+	if (!is_valid(base, &base_l))
+		return (0);
+	r = 0;
+	signe = 1;
+	while (*str == ' ' || (*str >= 7 && *str <= 13))
+		str++;
+	while (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			signe = -signe;
+		str++;
+	}
+	while (*str <= '9' && *str >= '0')
+	{
+		r *= base_l;
+		r += get_place(*str, base);
+		str++;
+	}
+	return (r * signe);
 }
