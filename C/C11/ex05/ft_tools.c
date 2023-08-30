@@ -1,36 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_is_sort.c                                       :+:      :+:    :+:   */
+/*   ft_tools.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/29 21:32:54 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 12:25:08 by amura            ###   ########.fr       */
+/*   Created: 2023/08/30 12:51:58 by amura             #+#    #+#             */
+/*   Updated: 2023/08/30 13:01:22 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_is_sort(int *tab, int length, int (*f)(int, int))
-{
-	int	i;
-	int	s;
+#include <unistd.h>
 
-	if (length == 0 || length == 1)
-		return (1);
+void	ft_printnbr(int n)
+{
+	int	temp;
 	
-	i = 1;
-	s = 0;
-	while (!s)
+	if (n == -2147483648)
 	{
-		s = f(tab[i - 1], tab[i]);
-		i++;
+		write(1, "-2147483648", 11);
+		return ;
 	}
-	while (++i < length)
+	if (n < 0)
 	{
-		if (f(tab[i - 1], tab[i]) == s || f(tab[i - 1], tab[i]) == 0)
-			continue ;
-		else
-			return (0);
+		write(1, "-" , 1);
+		n = -n;
 	}
-	return (1);
+	if (n > 9)
+		ft_printnbr(n / 10);
+	temp = (n % 10 + '0');
+	write(1, &temp, 1);
 }
