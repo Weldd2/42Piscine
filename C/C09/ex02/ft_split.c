@@ -5,109 +5,86 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/21 12:28:11 by amura             #+#    #+#             */
-/*   Updated: 2023/08/22 13:15:49 by amura            ###   ########.fr       */
+/*   Created: 2023/08/30 11:44:28 by amura             #+#    #+#             */
+/*   Updated: 2023/08/30 12:08:43 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <unistd.h>
 #include <stdlib.h>
 
-int	ft_str_length(char *str)
+int	is_sep(char c, char *charset)
 {
-	unsigned int	str_length;
-
-	str_length = 0;
-	while (str[str_length])
-		str_length++;
-	return (str_length);
-}
-
-int	has_a_doublon(char *str)
-{
-	int	i;
-	int	j;
-
-	if (ft_str_length(str) == 1)
-		return (0);
-	if (ft_str_length(str) == 0)
-		return (1);
-	i = -1;
-	while (str[++i])
+	while (*charset)
 	{
-		j = i + 1;
-		while (str[j])
-		{
-			if (str[i] == str[j])
-				return (1);
-			j++;
-		}
+		if (c == *charset)
+			return (1);
+		charset++;
 	}
 	return (0);
 }
 
-int	*get_index(char *str, char *charset, int *nb_index)
+static int	count_words(char *str, char *charset)
 {
-	int	j;
-	int	i;
-	int	r_index;
-	int	*r;
+	int	count;
 
-	i = -1;
-	r = malloc(sizeof(int) * (ft_str_length(str)) + 1);
-	r_index = 0;
-	while (str[++i])
+	count = 0;
+	while (*str)
 	{
-		j = -1;
-		while (charset[++j])
+		while (*str && is_sep(*str, charset))
+			str++;
+		if (*str && !is_sep(*str, charset))
 		{
-			if (str[i] == charset[j])
-			{
-				r[r_index] = i;
-				r_index++;
-			}
+			count++;
+			while (*str && !is_sep(*str, charset))
+				str++;
 		}
 	}
-	*nb_index = r_index;
-	return (r);
+	return (count);
 }
 
-char	*get_str_between_indices(char *str, int start, int end)
+char	*make_word(char *str, int len)
 {
+	char	*word;
 	int		i;
-	int		compteur;
-	char	*r;
 
-	r = malloc(sizeof(char) * (end - start) + 1);
-	i = start;
-	compteur = 0;
-	while (i < end)
+	word = malloc(len + 1);
+	if (!word)
+		return (NULL);
+	i = 0;
+	while (i < len)
 	{
-		r[compteur] = str[i];
+		word[i] = str[i];
 		i++;
-		compteur++;
 	}
-	r[compteur] = '\0';
-	return (r);
+	word[i] = '\0';
+	return (word);
 }
 
 char	**ft_split(char *str, char *charset)
 {
-	int		nb_index;
+	char	**tab;
+	int		word_count;
 	int		i;
-	int		*index;
-	char	**r;
+	int		len;
 
-	i = -1;
-	if (has_a_doublon(charset))
+	word_count = count_words(str, charset);
+	tab = malloc((word_count + 1) * sizeof(char *));
+	if (!tab)
 		return (NULL);
-	index = get_index(str, charset, &nb_index);
-	r = malloc(sizeof(char *) * nb_index + 2);
-	while (++i < nb_index)
+	i = 0;
+	while (i < word_count)
 	{
-		if (index[i + 1])
-			r[i] = get_str_between_indices(str, index[i] + 1, index[i + 1]);
+		while (*str && is_sep(*str, charset))
+			str++;
+		len = 0;
+		while (str[len] && !is_sep(str[len], charset))
+			len++;
+		tab[i] = make_word(str, len);
+		if (!tab[i])
+			return (NULL);
+		str += len;
+		i++;
 	}
-	r[i] = '\0';
-	return (r);
+	tab[i] = 0;
+	return (tab);
 }
