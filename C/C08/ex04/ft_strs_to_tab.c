@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/21 16:57:16 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 22:55:49 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 03:19:38 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,6 @@ struct s_stock_str	*ft_strs_to_tab(int ac, char **av)
 		tab[i].size = str_len(av[i]);
 		tab[i].copy = ft_strdup(tab[i].str);
 	}
-	tab[i].str = "";
+	tab[i].str = 0;
 	return (tab);
 }
