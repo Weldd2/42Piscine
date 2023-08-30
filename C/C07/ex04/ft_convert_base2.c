@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:22:03 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 03:11:49 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 10:53:08 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,7 +65,7 @@ int	atoi_base(char *nbr, char *base, int b_l)
 	s = 1;
 	while (nbr[++i])
 	{
-		if (nbr[i] == '-' && r == 0)
+		if ((nbr[i] == '-' || (nbr[i] >= 7 || nbr[i] <= 13)) && r == 0)
 		{
 			s = -s;
 			r = -r;
@@ -88,4 +88,9 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	nb = atoi_base(nbr, base_from, bf_l);
 	r = itoa_base(nb, base_to, bt_l);
 	return (r);
+}
+#include <stdio.h>
+int	main(void)
+{
+	printf("%s\n", ft_convert_base("-  010111001", "01", "0123456789abcdef"));
 }

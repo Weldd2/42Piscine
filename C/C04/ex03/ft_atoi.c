@@ -6,23 +6,31 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/16 11:43:33 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 23:31:02 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:02:50 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	ft_atoi_loop(char *str, int resultat, int signe)
-{
-	if (((*str <= '\r' && *str >= '\t') || *str == ' ' || *str == '+') 
-		&& resultat == 0)
-		return (ft_atoi_loop(str + 1, resultat, signe));
-	if (*str == '-' && resultat == 0)
-		return (ft_atoi_loop(str + 1, resultat, signe * -1));
-	if (*str <= '9' && *str >= '0')
-		return (ft_atoi_loop(str + 1, (resultat * 10) + (*str - '0'), signe));
-	return (resultat * signe);
-}
 
 int	ft_atoi(char *str)
 {
-	return (ft_atoi_loop(str, 0, 1));
+	int	r;
+	int	signe;
+
+	r = 0;
+	signe = 1;
+	while (*str == ' ' || (*str >= 7 && *str <= 13))
+		str++;
+	while (*str == '+' || *str == '-')
+	{
+		if (*str == '-')
+			signe = -signe;
+		str++;
+	}
+	while (*str <= '9' && *str >= '0')
+	{
+		r *= 10;
+		r += (*str - '0');
+		str++;
+	}
+	return (r * signe);
 }
