@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   ft_split.c                                         :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2023/08/30 12:09:55 by amura             #+#    #+#             */
+/*   Updated: 2023/08/30 12:09:56 by amura            ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include <stdlib.h>
 
 static int	is_sep(char c, char *charset)
@@ -13,7 +25,7 @@ static int	is_sep(char c, char *charset)
 
 static int	count_words(char *str, char *charset)
 {
-	int count;
+	int	count;
 
 	count = 0;
 	while (*str)
@@ -30,7 +42,7 @@ static int	count_words(char *str, char *charset)
 	return (count);
 }
 
-static char	*make_word(char *str, int len)
+char	*make_word(char *str, int len)
 {
 	char	*word;
 	int		i;
@@ -48,7 +60,7 @@ static char	*make_word(char *str, int len)
 	return (word);
 }
 
-char		**ft_split(char *str, char *charset)
+char	**ft_split(char *str, char *charset)
 {
 	char	**tab;
 	int		word_count;

@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:22:03 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 11:05:49 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 12:11:34 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,9 +90,4 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	nb = atoi_base(nbr, base_from, bf_l);
 	r = itoa_base(nb, base_to, bt_l);
 	return (r);
-}
-#include <stdio.h>
-int	main(void)
-{
-	printf("%s\n", ft_convert_base("2147483647", "0123456789", "0123456789abcdef"));
 }

@@ -6,13 +6,13 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 04:07:17 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 10:49:44 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 12:10:53 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
 
-static int	ft_strlen(char *str)
+int	ft_strlen(char *str)
 {
 	int	i;
 
@@ -22,7 +22,7 @@ static int	ft_strlen(char *str)
 	return (i);
 }
 
-static int	ft_total_len(int size, char **strs, char *sep)
+int	ft_total_len(int size, char **strs, char *sep)
 {
 	int	i;
 	int	total_len;
@@ -38,7 +38,7 @@ static int	ft_total_len(int size, char **strs, char *sep)
 	return (total_len);
 }
 
-static void	ft_strcat(char *dest, char *src)
+void	ft_strcat(char *dest, char *src)
 {
 	while (*dest)
 		dest++;
@@ -51,7 +51,7 @@ static void	ft_strcat(char *dest, char *src)
 	*dest = '\0';
 }
 
-static void	concat_strings(char *result, char **strs, char *sep, int size)
+void	concat_strings(char *result, char **strs, char *sep, int size)
 {
 	int	i;
 
@@ -65,7 +65,7 @@ static void	concat_strings(char *result, char **strs, char *sep, int size)
 	}
 }
 
-char		*ft_strjoin(int size, char **strs, char *sep)
+char	*ft_strjoin(int size, char **strs, char *sep)
 {
 	char	*result;
 	int		total_len;
@@ -85,46 +85,4 @@ char		*ft_strjoin(int size, char **strs, char *sep)
 	*result = '\0';
 	concat_strings(result, strs, sep, size);
 	return (result);
-}
-#include <stdio.h>
-
-// Mettez ici la définition de votre fonction ft_strjoin
-
-int main(void)
-{
-	char *strs1[] = {"Hello", "World", "42"};
-	char *sep1 = " ";
-	char *result1 = ft_strjoin(0, strs1, sep1);
-	if (result1)
-	{
-		printf("Test 1: %s\n", result1);
-		free(result1);
-	}
-
-	char *strs2[] = {"One", "Two", "Three"};
-	char *sep2 = ", ";
-	char *result2 = ft_strjoin(3, strs2, sep2);
-	if (result2)
-	{
-		printf("Test 2: %s\n", result2);
-		free(result2);
-	}
-
-	char *strs3[] = {"OnlyOne"};
-	char *sep3 = "";
-	char *result3 = ft_strjoin(1, strs3, sep3);
-	if (result3)
-	{
-		printf("Test 3: %s\n", result3);
-		free(result3);
-	}
-
-	char *result4 = ft_strjoin(0, NULL, "");
-	if (result4)
-	{
-		printf("Test 4: %s\n", result4);
-		free(result4);
-	}
-
-	return (0);
 }
