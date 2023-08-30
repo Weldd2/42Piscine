@@ -5,103 +5,70 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/18 12:40:16 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 20:50:33 by amura            ###   ########.fr       */
+/*   Created: 2023/08/30 02:46:37 by amura             #+#    #+#             */
+/*   Updated: 2023/08/30 02:47:42 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
-#include <stdio.h>
 
-int	atoi_base(char *str, char *base, int s, int r);
-
-char	*itoa_base(int nb, char *base, char *r, int i)
+typedef struct s_params
 {
-	int		base_l;
-	int		j;
-	char	*str2;
+	char	*str;
+	long	nb;
+	char	*base;
+	int		base_len;
+}	t_params;
 
-	base_l = -1;
-	while (base[++base_l])
-		;
-	r[i] = base[nb % base_l];
-	if (nb >= base_l)
+int	ft_nbrlen(long nb, int base_len)
+{
+	int	len;
+
+	len = 0;
+	if (nb <= 0)
+		len = 1;
+	while (nb != 0)
 	{
-		return (itoa_base(nb / base_l, base, r, i + 1));
+		nb /= base_len;
+		len++;
 	}
-	str2 = malloc(i * sizeof(char));
-	j = 0;
-	while (r[i])
-		str2[j++] = r[i--];
-	return (str2);
+	return (len);
 }
 
-int	is_valid_base(char *base)
+void	fill_str(t_params *p, int len)
 {
-	int	i;
-	int	j;
+	long	tmp;
 
-	i = -1;
-	while (base[++i])
-		;
-	if (i < 2)
-		return (0);
-	i = 0;
-	while (base[i + 1])
+	while (p->nb != 0)
 	{
-		j = i + 1;
-		while (base[j])
-		{
-			if (base[i] == base[j] || base[i] == '+' || base[i] == '-'
-				|| base[j] == '+' || base[j] == '-' || base[i] <= ' '
-				|| base[i] > 126 || base[j] <= ' ' || base[j] > 126)
-				return (0);
-			j++;
-		}
-		i++;
+		tmp = p->nb % p->base_len;
+		if (tmp < 0)
+			tmp = -tmp;
+		p->str[len] = p->base[tmp];
+		len--;
+		p->nb /= p->base_len;
 	}
-	return (1);
 }
 
-char	*inverse_number(char *str)
+char	*itoa_base(long nb, char *base, int base_len)
 {
-	char	*ns;
-	int		str_l;
-	int		i;
+	char		*r;
+	int			len;
+	int			is_negative;
+	t_params	p;
 
-	str_l = -1;
-	while (str[++str_l])
-		;
-	ns = malloc(str_l + 2);
-	if (!ns)
+	is_negative = (nb < 0);
+	len = ft_nbrlen(nb, base_len);
+	r = malloc(len + 1);
+	if (!r)
 		return (NULL);
-	ns[0] = '-';
-	i = -1;
-	while (str[++i])
-		ns[i + 1] = str[i];
-	free(str);
-	return (ns);
-}
-
-char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
-{
-	int			nb;
-	int			base_l;
-	char		*str;
-	int			signe;
-
-	if (!(is_valid_base(base_from) && is_valid_base(base_to)))
-		return (NULL);
-	nb = atoi_base(nbr, base_from, 1, 0);
-	signe = nb < 0;
-	if (signe)
-		nb *= -1;
-	base_l = -1;
-	while (base_to[++base_l])
-		;
-	str = malloc((nb / base_l) + 1);
-	str = itoa_base(nb, base_to, str, 0);
-	if (signe)
-		str = inverse_number(str);
-	return (str);
+	r[len] = '\0';
+	p = (t_params){r, nb, base, base_len};
+	if (nb == 0)
+		r[0] = base[0];
+	else
+		fill_str(&p, len - 1);
+	if (is_negative)
+		r[0] = '-';
+	return (r);
 }

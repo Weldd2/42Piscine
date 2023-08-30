@@ -5,34 +5,87 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/28 19:21:28 by amura             #+#    #+#             */
-/*   Updated: 2023/08/28 22:24:33 by amura            ###   ########.fr       */
+/*   Created: 2023/08/30 00:22:03 by amura             #+#    #+#             */
+/*   Updated: 2023/08/30 02:48:41 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-int	get_p(char *str, char c)
+#include <stdio.h>
+
+char	*itoa_base(long nb, char *base, int b_l);
+
+int	is_valid(char *base, int *bl)
+{
+	int	str_l;
+	int	i;
+	int	j;
+
+	str_l = 0;
+	while (base[str_l])
+		str_l++;
+	*bl = str_l;
+	if (str_l == 0 || str_l == 1)
+		return (0);
+	i = -1;
+	while (base[++i])
+	{
+		if (base[i] == '+' || base[i] == '-' || base[i] == ' ')
+			return (0);
+		j = i;
+		while (base[++j])
+		{
+			if (base[i] == base[j])
+			{
+				return (0);
+			}
+		}
+	}
+	return (1);
+}
+
+int	get_place(char c, char *base)
 {
 	int	i;
 
 	i = -1;
-	while (str[++i])
-		if (str[i] == c)
+	while (base[++i])
+		if (base[i] == c)
 			return (i);
-	return (-1);
+	return (0);
 }
 
-int	atoi_base(char *str, char *base, int s, int r)
+int	atoi_base(char *nbr, char *base, int b_l)
 {
-	int	base_l;
+	long	r;
+	int		i;
+	int		s;
 
-	base_l = -1;
-	while (base[++base_l])
-		;
-	if (((*str >= 7 && *str <= 13) || *str == ' ' || *str == '+') && r == 0)
-		return (atoi_base(str + 1, base, s, r));
-	if (*str == '-' && r == 0)
-		return (atoi_base(str + 1, base, s * -1, r));
-	if (*str <= '9' && *str >= '0')
-		return (atoi_base(str + 1, base, s, r * base_l + get_p(base, *str)));
-	return (r * s);
+	i = -1;
+	r = 0;
+	s = 1;
+	while (nbr[++i])
+	{
+		if (nbr[i] == '-' && r == 0)
+		{
+			s = -s;
+			r = -r;
+		}
+		r *= b_l;
+		r += (get_place(nbr[i], base));
+	}
+	return ((int)(r * s));
+}
+
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
+{
+	int		bf_l;
+	int		bt_l;
+	int		nb;
+	char	*r;
+
+	if (!(is_valid(base_from, &bf_l) && is_valid(base_to, &bt_l)))
+		return (0);
+	nb = atoi_base(nbr, base_from, bf_l);
+	r = itoa_base(nb, base_to, bt_l);
+	return (r);
 }
