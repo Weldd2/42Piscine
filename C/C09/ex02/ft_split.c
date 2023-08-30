@@ -5,12 +5,13 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/30 11:44:28 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 12:08:43 by amura            ###   ########.fr       */
+/*   Created: 2023/08/30 14:33:12 by amura             #+#    #+#             */
+/*   Updated: 2023/08/30 14:45:03 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdlib.h>
+#include <unistd.h>
 
 int	is_sep(char c, char *charset)
 {
@@ -23,23 +24,28 @@ int	is_sep(char c, char *charset)
 	return (0);
 }
 
-static int	count_words(char *str, char *charset)
+int	count_words(char *str, char *charset)
 {
 	int	count;
+	int	found;
 
 	count = 0;
+	found = 0;
 	while (*str)
 	{
 		while (*str && is_sep(*str, charset))
 			str++;
 		if (*str && !is_sep(*str, charset))
 		{
+			found = 1;
 			count++;
 			while (*str && !is_sep(*str, charset))
 				str++;
 		}
 	}
-	return (count);
+	if (found)
+		return (count);
+	return (1);
 }
 
 char	*make_word(char *str, int len)
@@ -60,31 +66,34 @@ char	*make_word(char *str, int len)
 	return (word);
 }
 
-char	**ft_split(char *str, char *charset)
+void	split_words(char **tab, char *str, char *charset)
 {
-	char	**tab;
-	int		word_count;
-	int		i;
-	int		len;
+	int	i;
+	int	len;
 
-	word_count = count_words(str, charset);
-	tab = malloc((word_count + 1) * sizeof(char *));
-	if (!tab)
-		return (NULL);
 	i = 0;
-	while (i < word_count)
+	while (*str)
 	{
 		while (*str && is_sep(*str, charset))
 			str++;
 		len = 0;
 		while (str[len] && !is_sep(str[len], charset))
 			len++;
-		tab[i] = make_word(str, len);
-		if (!tab[i])
-			return (NULL);
+		tab[i++] = make_word(str, len);
 		str += len;
-		i++;
 	}
-	tab[i] = 0;
+}
+
+char	**ft_split(char *str, char *charset)
+{
+	char	**tab;
+	int		word_count;
+
+	word_count = count_words(str, charset);
+	tab = malloc((word_count + 1) * sizeof(char *));
+	if (!tab)
+		return (NULL);
+	split_words(tab, str, charset);
+	tab[word_count] = 0;
 	return (tab);
 }
