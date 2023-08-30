@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 11:30:56 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 14:19:29 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,15 @@ int	get_place(char c, char *base)
 		if (base[i] == c)
 			return (i);
 	return (-1);
+}
+int	get_error(char *nbr, char *base)
+{
+	int	i;
+	
+	i = -1;
+	while (nbr[++i])
+		if (get_place(nbr[i], base) == -1)
+			return (-1);
 }
 
 int	is_valid(char *base, int *bl)
@@ -55,6 +64,8 @@ int	ft_atoi_base(char *str, char *base)
 	int	base_l;
 
 	if (!is_valid(base, &base_l))
+		return (0);
+	if (get_error(str, base))
 		return (0);
 	r = 0;
 	signe = 1;
