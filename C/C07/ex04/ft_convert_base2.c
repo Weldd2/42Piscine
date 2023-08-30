@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:22:03 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 10:53:08 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 11:05:49 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,26 +54,28 @@ int	get_place(char c, char *base)
 	return (0);
 }
 
-int	atoi_base(char *nbr, char *base, int b_l)
+int	atoi_base(char *str, char *base, int base_l)
 {
-	long	r;
-	int		i;
-	int		s;
+	int	r;
+	int	signe;
 
-	i = -1;
 	r = 0;
-	s = 1;
-	while (nbr[++i])
+	signe = 1;
+	while (*str == ' ' || (*str >= 7 && *str <= 13))
+		str++;
+	while (*str == '+' || *str == '-')
 	{
-		if ((nbr[i] == '-' || (nbr[i] >= 7 || nbr[i] <= 13)) && r == 0)
-		{
-			s = -s;
-			r = -r;
-		}
-		r *= b_l;
-		r += (get_place(nbr[i], base));
+		if (*str == '-')
+			signe = -signe;
+		str++;
 	}
-	return ((int)(r * s));
+	while (*str <= '9' && *str >= '0')
+	{
+		r *= base_l;
+		r += get_place(*str, base);
+		str++;
+	}
+	return (r * signe);
 }
 
 char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
@@ -92,5 +94,5 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 #include <stdio.h>
 int	main(void)
 {
-	printf("%s\n", ft_convert_base("-  010111001", "01", "0123456789abcdef"));
+	printf("%s\n", ft_convert_base("2147483647", "0123456789", "0123456789abcdef"));
 }
