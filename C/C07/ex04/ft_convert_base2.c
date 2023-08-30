@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 00:22:03 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 14:13:59 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 14:16:13 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ int	get_place(char c, char *base)
 	while (base[++i])
 		if (base[i] == c)
 			return (i);
-	return (0);
+	return (-1);
 }
 
 int	atoi_base(char *str, char *base, int base_l)
@@ -84,9 +84,14 @@ char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 	int		bt_l;
 	int		nb;
 	char	*r;
+	int		i;
 
 	if (!(is_valid(base_from, &bf_l) && is_valid(base_to, &bt_l)))
 		return (0);
+	i = -1;
+	while (nbr[++i])
+		if (get_place(nbr[i], base_from) == -1)
+			return ("0");
 	nb = atoi_base(nbr, base_from, bf_l);
 	r = itoa_base(nb, base_to, bt_l);
 	return (r);
