@@ -6,45 +6,50 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:39:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 15:00:56 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/31 22:22:20 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
 
-void	ft_printnbr(int a);
+void	ft_printnbr(long a);
 
-void	addition(int a, int b)
+void	addition(long a, long b)
 {
 	ft_printnbr(a + b);
+	write(1, "\n", 1);
 }
 
-void	multiplication(int a, int b)
+void	multiplication(long a, long b)
 {
 	ft_printnbr(a * b);
+	write(1, "\n", 1);
 }
 
-void	soustraction(int a, int b)
+void	soustraction(long a, long b)
 {
 	ft_printnbr(a - b);
+	write(1, "\n", 1);
 }
 
-void	division(int a, int b)
+void	division(long a, long b)
 {
 	if (b == 0)
 	{
-		write(1, "Stop : division by zero", 24);
+		write(1, "Stop : division by zero\n", 25);
 		return ;
 	}
 	ft_printnbr(a / b);
+	write(1, "\n", 1);
 }
 
-void	modulo(int a, int b)
+void	modulo(long a, long b)
 {
 	if (b == 0)
 	{
-		write(1, "Stop : modulo by zero", 22);
+		write(1, "Stop : modulo by zero\n", 23);
 		return ;
 	}
 	ft_printnbr(a % b);
+	write(1, "\n", 1);
 }

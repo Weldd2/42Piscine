@@ -6,13 +6,13 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/31 19:59:30 by amura             #+#    #+#             */
-/*   Updated: 2023/08/31 20:11:09 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/31 20:17:01 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 int	ft_strcmp(const char *s1, const char *s2, int n)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (i < n)
@@ -47,4 +47,3 @@ char	*ft_strstr(char *str, char *to_find)
 	}
 	return ("");
 }
-
