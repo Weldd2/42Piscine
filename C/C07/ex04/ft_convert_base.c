@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:46:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/31 18:03:30 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/31 18:05:29 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,7 +84,7 @@ char	*itoa_base(long nbr, char *base, int base_length)
 	return (r);
 }
 
-char *ft_convert_base(char *nbr, char *base_from, char *base_to)
+char	*ft_convert_base(char *nbr, char *base_from, char *base_to)
 {
 	long	nb;
 	int		base_from_l;
