@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 02:46:37 by amura             #+#    #+#             */
-/*   Updated: 2023/08/31 19:18:06 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/31 19:20:35 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	is_valid(char *base, int *bl)
 void	itoa_base_loop(long nb, char *base, int base_length)
 {
 	char	i;
-	
+
 	i = 0;
 	if (nb < 0)
 	{

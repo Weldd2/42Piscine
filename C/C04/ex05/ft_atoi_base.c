@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/31 19:18:05 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/31 19:21:13 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,6 +50,7 @@ int	is_valid(char *base, int *bl)
 	}
 	return (1);
 }
+
 int	atoi_base(char *nbr, char *base)
 {
 	long	r;
@@ -74,5 +75,5 @@ int	atoi_base(char *nbr, char *base)
 		r += get_place(*nbr, base);
 		nbr++;
 	}
-	return (int)(r * s);
+	return ((int)(r * s));
 }
