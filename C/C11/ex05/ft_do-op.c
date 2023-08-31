@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 12:26:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 13:34:36 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:06:16 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	is_valid_nb(char *nb, int *n)
 	return (1);
 }
 
-int main(int argc, char *argv[])
+int	main(int argc, char *argv[])
 {
 	char	ope;
 	int		nb1;
@@ -75,5 +75,5 @@ int main(int argc, char *argv[])
 		if (ope == '%')
 			return (modulo(nb1, nb2));
 	}
-	return 0;
+	return (0);
 }

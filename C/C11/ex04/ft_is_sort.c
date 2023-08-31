@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:32:54 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 12:25:08 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:00:42 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,6 @@ int	ft_is_sort(int *tab, int length, int (*f)(int, int))
 
 	if (length == 0 || length == 1)
 		return (1);
-	
 	i = 1;
 	s = 0;
 	while (!s)

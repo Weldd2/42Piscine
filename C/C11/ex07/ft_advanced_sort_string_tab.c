@@ -6,13 +6,13 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:56:02 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 14:59:04 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:11:20 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_advanced_sort_string_tab(char **tab, int(*cmp)(char *, char *))
+void	ft_advanced_sort_string_tab(char **tab, int (*cmp)(char *, char *))
 {
-		int		i;
+	int		i;
 	int		j;
 	char	*temp;
 

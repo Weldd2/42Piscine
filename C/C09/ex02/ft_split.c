@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/30 14:33:12 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 14:45:03 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/31 11:53:56 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,7 +79,8 @@ void	split_words(char **tab, char *str, char *charset)
 		len = 0;
 		while (str[len] && !is_sep(str[len], charset))
 			len++;
-		tab[i++] = make_word(str, len);
+		if (len > 0)
+			tab[i++] = make_word(str, len);
 		str += len;
 	}
 }

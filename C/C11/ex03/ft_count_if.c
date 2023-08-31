@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:27:44 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 21:31:41 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:01:02 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,17 +36,3 @@ int	ft_count_if(char **tab, int length, int (*f)(char *))
 	}
 	return (j);
 }
-
-int	has_a_a(char *str)
-{
-	int	i;
-	
-	i = -1;
-	while (str[++i])
-	{
-		if (str[i] == 'a')
-			return (1);
-	}
-	return (0);
-}
-

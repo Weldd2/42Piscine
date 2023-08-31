@@ -6,14 +6,14 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/29 21:09:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/29 21:14:00 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/30 15:11:07 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void ft_foreach(int *tab, int length, void(*f)(int))
+void	ft_foreach(int *tab, int length, void (*f)(int))
 {
 	int	i;
-	
+
 	i = -1;
 	while (++i < length)
 	{
