@@ -5,23 +5,12 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/08/17 10:39:47 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 11:30:47 by amura            ###   ########.fr       */
+/*   Created: 2023/08/30 02:46:37 by amura             #+#    #+#             */
+/*   Updated: 2023/08/31 19:18:06 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <unistd.h>
-
-void	ft_putnbr_base_loop(long nbr, char *base, int base_length)
-{
-	if (nbr < base_length)
-		write(1, &base[nbr], 1);
-	else
-	{
-		ft_putnbr_base_loop(nbr / base_length, base, base_length);
-		write(1, &base[nbr % base_length], 1);
-	}
-}
 
 int	is_valid(char *base, int *bl)
 {
@@ -38,30 +27,42 @@ int	is_valid(char *base, int *bl)
 	i = -1;
 	while (base[++i])
 	{
-		if (base[i] == '+' || base[i] == '-' || base[i] == ' ')
+		if (base[i] == '+' || base[i] == '-' || base[i] == ' '
+			|| (base[i] >= 7 && base[i] <= 13))
 			return (0);
 		j = i;
 		while (base[++j])
+		{
 			if (base[i] == base[j])
 				return (0);
+		}
 	}
 	return (1);
 }
 
+void	itoa_base_loop(long nb, char *base, int base_length)
+{
+	char	i;
+	
+	i = 0;
+	if (nb < 0)
+	{
+		nb *= -1;
+		write(1, "-", 1);
+	}
+	if (nb >= base_length)
+		itoa_base_loop(nb / base_length, base, base_length);
+	i = (base[nb % base_length]);
+	write(1, &i, 1);
+}
+
 void	ft_putnbr_base(int nbr, char *base)
 {
-	int		base_length;
-	long	temp;
+	long	nb;
+	int		base_to_l;
 
-	temp = (long)nbr;
-	if (!is_valid(base, &base_length))
+	if (!is_valid(base, &base_to_l))
 		return ;
-	if (!base_length)
-		return ;
-	if (temp < 0)
-	{
-		write(1, "-", 1);
-		temp *= -1;
-	}
-	ft_putnbr_base_loop(temp, base, base_length);
+	nb = (long)nbr;
+	itoa_base_loop(nb, base, base_to_l);
 }

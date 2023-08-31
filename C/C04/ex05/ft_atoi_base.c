@@ -6,7 +6,7 @@
 /*   By: amura <amura@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/17 11:34:14 by amura             #+#    #+#             */
-/*   Updated: 2023/08/30 14:19:29 by amura            ###   ########.fr       */
+/*   Updated: 2023/08/31 19:18:05 by amura            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,18 +18,9 @@ int	get_place(char c, char *base)
 
 	i = -1;
 	while (base[++i])
-		if (base[i] == c)
+		if (c == base[i])
 			return (i);
 	return (-1);
-}
-int	get_error(char *nbr, char *base)
-{
-	int	i;
-	
-	i = -1;
-	while (nbr[++i])
-		if (get_place(nbr[i], base) == -1)
-			return (-1);
 }
 
 int	is_valid(char *base, int *bl)
@@ -47,41 +38,41 @@ int	is_valid(char *base, int *bl)
 	i = -1;
 	while (base[++i])
 	{
-		if (base[i] == '+' || base[i] == '-' || base[i] == ' ')
+		if (base[i] == '+' || base[i] == '-' || base[i] == ' '
+			|| (base[i] >= 7 && base[i] <= 13))
 			return (0);
 		j = i;
 		while (base[++j])
+		{
 			if (base[i] == base[j])
 				return (0);
+		}
 	}
 	return (1);
 }
-
-int	ft_atoi_base(char *str, char *base)
+int	atoi_base(char *nbr, char *base)
 {
-	int	r;
-	int	signe;
-	int	base_l;
+	long	r;
+	int		s;
+	int		base_length;
 
-	if (!is_valid(base, &base_l))
-		return (0);
-	if (get_error(str, base))
-		return (0);
+	s = 1;
 	r = 0;
-	signe = 1;
-	while (*str == ' ' || (*str >= 7 && *str <= 13))
-		str++;
-	while (*str == '+' || *str == '-')
+	if (!is_valid(base, &base_length))
+		return (0);
+	while (*nbr == ' ' || (*nbr >= 7 && *nbr <= 13))
+		nbr++;
+	while (*nbr == '+' || *nbr == '-')
 	{
-		if (*str == '-')
-			signe = -signe;
-		str++;
+		if (*nbr == '-')
+			s = -s;
+		nbr++;
 	}
-	while (*str <= '9' && *str >= '0')
+	while (get_place(*nbr, base) != -1)
 	{
-		r *= base_l;
-		r += get_place(*str, base);
-		str++;
+		r *= base_length;
+		r += get_place(*nbr, base);
+		nbr++;
 	}
-	return (r * signe);
+	return (int)(r * s);
 }
